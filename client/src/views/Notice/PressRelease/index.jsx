@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {isNil} from "ramda"
 import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import { isEmpty } from "ramda";
@@ -8,7 +9,7 @@ const headings = ["शीर्षक", "रुजुकर्ता", "प्�
 
 class PressRelease extends Component {
   render() {
-    const pressreleaseList = this.props.pressreleaseData;
+    const pressreleaseList = isNil(this.props.pressreleaseData)?[]:this.props.pressreleaseData
 
     return (
       <div className="content">

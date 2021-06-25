@@ -10,14 +10,7 @@ import { store } from "../reducers";
 import AppActions from "../actions/app";
 
 const Config = {
-  //   API_URL: equals(process.env.NODE_ENV, "production")
-  //     ? "https://hcm.drivingsales.com/api/"
-  //     : "https://qa.hcm.drivingsales.com/api/",
-  //   S3_URL: "https://s3-us-west-2.amazonaws.com/",
-  //   S3_API: equals(process.env.NODE_ENV, "production")
-  //     ? "hcm.drivingsales.com-assets"
-  //     : "hcm-qa.drivingsales.com-assets",
-  API_URL: "http://localhost:4000/api/v1/",
+  API_URL: "http://localhost:3001/api/v1/",
 };
 
 // const authenticated = (api) => {
@@ -56,8 +49,8 @@ const create = (baseURL = Config.API_URL) => {
 
   api.addMonitor(naviMonitor);
 
-  // Login API
-  const loginByUsername = (payload) => api.post("auth/login", payload);
+   // Login API
+   const loginByUsername = (payload) => api.post("users/login", payload);
 
   const postAdminStaffSave = (payload) => api.post("staffs", payload);
 

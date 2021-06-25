@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
-import { isEmpty } from "ramda";
+import { isEmpty,isNil } from "ramda";
 import { englishToNepaliNumber } from "nepali-number";
 
 const headings = ["शीर्षक", "विषय", "प्रकाशित मिति"];
 
 class Downloads extends Component {
   render() {
-    const { downloadsData } = this.props;
+    const downloadsData = isNil(this.props.Downloads) ? [] : this.props.Downloads;
     return (
       <div className="content">
         <div className="titlebar">Downloads</div>
@@ -48,7 +48,7 @@ class Downloads extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  downloadsData: state.admin.downloads,
+  Downloads: state.admin.downloads,
 });
 
 export default connect(mapStateToProps, null)(Downloads);

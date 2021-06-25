@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {isNil} from "ramda"
 import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import { isEmpty } from "ramda";
@@ -8,7 +9,8 @@ const headings = ["शीर्षक", "रुजुकर्ता", "प्�
 
 class NewsAndNotice extends Component {
   render() {
-    const newsandnoticeList = this.props.newsandnoticeData;
+    
+    const newsandnoticeList = isNil(this.props.newsandnoticeData)?[]:this.props.newsandnoticeData
     return (
       <div className="content">
         <div className="titlebar">सूचना तथा समाचारहरू</div>
@@ -47,7 +49,7 @@ class NewsAndNotice extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  newsandnoticeData: state.admin.newsandnotice,
+  // newsandnoticeData: state.admin.newsandnotice,
 });
 
 export default connect(mapStateToProps, null)(NewsAndNotice);

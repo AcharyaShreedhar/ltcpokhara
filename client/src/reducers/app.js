@@ -11,12 +11,12 @@ const initialState = Immutable({
 const loginRequest = (state, action) =>
   state.merge({ ...state, token: "", status: "pending" });
 const loginSuccess = (state, action) => {
-  const { token, user } = action.response;
+  const { user_token, user } = action.response;
 
   return state.merge({
     ...state,
     status: "done",
-    token,
+    token: user_token,
     user,
   });
 };

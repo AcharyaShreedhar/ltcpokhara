@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {isNil} from "ramda"
 import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
 import { englishToNepaliNumber } from "nepali-number";
@@ -7,7 +8,7 @@ const headings = ["नाम", "पद", "शाखा", "ईमेल", "फो
 
 class Staff extends Component {
   render() {
-    const staffList = this.props.staffsData.staffs;
+    const staffList = isNil(this.props.staffsData)?[]:this.props.staffsData.staffs
     return (
       <div className="content">
         <div className="titlebar">कर्मचारी</div>
@@ -45,7 +46,7 @@ class Staff extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  staffsData: state.admin.staffs.data,
+  // staffsData: state.admin.staffs.data,
 });
 
 export default connect(mapStateToProps, null)(Staff);

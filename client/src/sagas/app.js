@@ -10,14 +10,14 @@ export function* loginRequest(api, action) {
   const response = yield api.loginByUsername(payload);
 
   if (response.ok) {
-    const { msg, token, user } = response.data.data;
-    window.token = token;
-
-    yield put(AppActions.loginSuccess({ token, user }));
+    const { user } = response.data;
+    const { user_token } = user;
+    window.token = user_token;
+    yield put(AppActions.loginSuccess({ user_token, user }));
     yield put(AdminActions.fetchnoticeRequest());
     yield put(AdminActions.fetchpublicationRequest());
     yield put(AdminActions.fetchstaffRequest());
-    if (token !== "" && typeof token !== "undefined") {
+    if (user_token !== "" && typeof user_token !== "undefined") {
       toast.success("Successfully Logged In!", {
         position: "top-center",
         autoClose: 5000,
@@ -29,7 +29,7 @@ export function* loginRequest(api, action) {
       });
       yield call(history.push, "/admin");
     } else {
-      toast.error("Oops, username or password is wrong!", {
+      toast.error("तपाईको कार्य सफल हुन सकेन.. कृपया पुनः प्रयास गर्नुहोला !!!!", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -40,7 +40,7 @@ export function* loginRequest(api, action) {
       });
     }
   } else {
-    toast.error("Oops, username or password is wrong!", {
+    toast.error("तपाईको कार्य सफल हुन सकेन.. कृपया पुनः प्रयास गर्नुहोला !!!!", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,

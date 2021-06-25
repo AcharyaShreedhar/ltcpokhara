@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {isNil} from "ramda"
 import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
 import { englishToNepaliNumber } from "nepali-number";
@@ -7,7 +8,8 @@ const headings = ["शीर्षक", "रुजुकर्ता", "मि�
 
 class Events extends Component {
   render() {
-    const eventList = this.props.eventsData;
+    
+    const eventList = isNil(this.props.eventsData)?[]:this.props.eventsData
     return (
       <div className="content">
         <div className="titlebar">कार्यक्रमहरू</div>

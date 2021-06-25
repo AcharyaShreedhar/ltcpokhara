@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { isNil } from "ramda";
 import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import { isEmpty } from "ramda";
@@ -8,7 +9,7 @@ const headings = ["शीर्षक", "विषय", "प्रकाशि�
 
 class Books extends Component {
   render() {
-    const { bookData } = this.props;
+    const booksData = isNil(this.props.bookData) ? [] : this.props.bookData;
     return (
       <div className="content">
         <div className="titlebar">हाते पुस्तिका</div>
@@ -24,8 +25,8 @@ class Books extends Component {
               </tr>
             </thead>
             <tbody>
-              {!isEmpty(bookData) ? (
-                bookData.map((book, index) => (
+              {!isEmpty(booksData) ? (
+                booksData.map((book, index) => (
                   <tr>
                     <td>{englishToNepaliNumber(index + 1)}</td>
                     <td key={index}> {book.publication_title}</td>
