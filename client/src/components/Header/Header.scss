@@ -1,0 +1,32 @@
+.app-logo {
+  height: 10vmin;
+  pointer-events: none;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.top-bar {
+  background-color: #6b0707;
+  width: 100%;
+  padding: 10px;
+  color: white;
+}
+.header_content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  line-height: 1;
+}
+.info_section {
+  text-align: center;
+}
+.contact-section {
+  text-align: left;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+}

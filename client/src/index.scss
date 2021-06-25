@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.content {
+  display: flex;
+  text-align: left;
+  padding: 10px 20px;
+  flex-direction: column;
+}
+
+.titlebar {
+  display: flex;
+  text-align: left;
+  padding: 20px 50px;
+  border-radius: 10px;
+  border: 1px solid lightgrey;
+  margin-bottom: 10px;
+  background-color: #969faa;
+  color: white;
+  font-weight: 500;
+}
+.subtitle{
+  display: flex;
+  text-align: left;
+  padding: 20px 50px;
+  border-radius: 10px;
+  border: 1px solid lightgrey;
+  margin-bottom: 10px;
+  color:black;
+  font-weight: 500;
+}
+
+.card {
+  display: flex;
+  text-align: left;
+  padding: 20px 50px;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid lightgrey;
+}
+
+.sliderCard{
+  display: flex;
+  border-radius: 10px;
+  border: 1px solid lightgrey;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  background-color: rgb(182, 192, 204);
+}
+
+.carousel-indicators {
+  position: absolute;
+  right: 0;
+  bottom: -60px;
+  left: 0;
+  z-index: 15;
+  display: flex;
+  justify-content: center;
+  padding-left: 0;
+  margin-right: 15%;
+  margin-left: 15%;
+  list-style: none;
+}
+.carousel-caption {
+  position: absolute;
+  right: 15%;
+  bottom: -10px;
+  left: 15%;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 0px;
+  color: #fff;
+  text-align: center;
+}
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #6b0707;
+  padding: 30px;
+  color: #fff;
+  height: 10vh;
+}
