@@ -44,6 +44,19 @@ const addbooksSuccess = (state, action) =>
 const addbooksFailure = (state, action) =>
   state.merge({ ...state, status: "error" });
 
+  // fetch allnirdesika
+const fetchallnirdesikaRequest = (state, action) =>
+state.merge({ ...state, token: "", status: "pending" });
+const fetchallnirdesikaSuccess = (state, action) => {
+return state.merge({
+  ...state,
+  status: "done",
+  allnirdesikaData: action.response,
+});
+};
+const fetchallnirdesikaFailure = (state, action) => {
+state.merge({ ...state, status: "error" });
+};
 
 const clearRequest = (state, action) =>
   state.merge({ ...state, ...initialState });
@@ -62,6 +75,11 @@ export const reducer = createReducer(initialState, {
 [PublicationTypes.ADDBOOKS_REQUEST]: addbooksRequest,
 [PublicationTypes.ADDBOOKS_SUCCESS]: addbooksSuccess,
 [PublicationTypes.ADDBOOKS_FAILURE]: addbooksFailure,
+
+//Fetch allnirdesika  
+[PublicationTypes.FETCHALLNIRDESIKA_REQUEST]: fetchallnirdesikaRequest,
+[PublicationTypes.FETCHALLNIRDESIKA_SUCCESS]: fetchallnirdesikaSuccess,
+[PublicationTypes.FETCHALLNIRDESIKA_FAILURE]: fetchallnirdesikaFailure,
 
 [PublicationTypes.CLEAR_REQUEST]: clearRequest,
 });

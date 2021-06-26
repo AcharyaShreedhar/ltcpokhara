@@ -77,3 +77,15 @@ export function* addbooksRequest(api, action) {
     yield put(PublicationActions.addbooksFailure());
   }
 }
+
+export function* fetchallnirdesikaRequest(api, action) {
+  const { payload } = action;
+  const payloaddata = isNil(payload) ? action : payload;
+  const response = yield api.getNirdesikaList(payloaddata);
+
+  if (response.ok) {
+    yield put(PublicationActions.fetchallnirdesikaSuccess(response.data));
+  } else {
+    yield put(PublicationActions.fetchallnirdesikaFailure());
+  }
+}
