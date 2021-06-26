@@ -14,7 +14,6 @@ class Edit extends Component {
     this.state = {
       id: props.history.location.item.event_id,
       event_title: props.history.location.item.event_title,
-      event_cat: props.history.location.item.event_cat,
       event_content: props.history.location.item.event_content,
       event_date: props.history.location.item.event_date,
       approved_by: props.history.location.item.approved_by,
@@ -22,7 +21,6 @@ class Edit extends Component {
       attachment: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleCategory = this.handleCategory.bind(this);
     this.handleDate = this.handleDate.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
   }
@@ -30,7 +28,6 @@ class Edit extends Component {
   handleSubmit() {
     const {
       event_title,
-      event_cat,
       event_content,
       event_date,
       approved_by,
@@ -41,7 +38,6 @@ class Edit extends Component {
       event: {
         data: {
           event_title: event_title,
-          event_cat: event_cat,
           event_content: event_content,
           event_date: event_date,
           approved_by: approved_by,
@@ -51,9 +47,6 @@ class Edit extends Component {
     };
 
     this.props.onUpdate(payload, attachment);
-  }
-  handleCategory(e) {
-    this.setState({ category: e.target.value });
   }
 
   handleDate(e) {
@@ -68,7 +61,6 @@ class Edit extends Component {
     const {
       event_title,
       event_content,
-      event_cat,
       event_date,
       approved_by,
       event_file,
@@ -95,19 +87,7 @@ class Edit extends Component {
             as="textarea"
             onChange={(e) => this.setState({ event_content: e })}
           />
-          <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label className="core-input-label">वर्ग</Form.Label>
-            <Form.Control
-              className="input"
-              as="select"
-              value={event_cat}
-              onChange={this.handleCategory}
-            >
-              <option value="newsevent">सूचना तथा समाचारहरू</option>
-              <option value="programme">कार्यक्रमहरू</option>
-              <option value="pressrelease">प्रेस विज्ञप्ति</option>
-            </Form.Control>
-          </Form.Group>
+
           <Input
             className="mb-4"
             title="रुजुकर्ता"
@@ -144,7 +124,6 @@ class Edit extends Component {
               </section>
             )}
           </Dropzone>
-
           <div className="justify-content-center d-flex mt-4">
             <Button
               name="Submit"
@@ -162,13 +141,11 @@ Edit.propTypes = {
   event_title: PropTypes.string,
   approved_by: PropTypes.string,
   event_date: PropTypes.string,
-  event_cat: PropTypes.string,
   onSubmit: PropTypes.func,
 };
 
 Edit.defaultProps = {
   event_title: "",
-  event_cat: "",
   event_date: "",
   approved_by: "",
 
