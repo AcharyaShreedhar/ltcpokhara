@@ -10,9 +10,35 @@ const noticeRoutes = [
     component: NewsAndNotice,
   },
   {
-    path: "/notice/pressrelease",
+    path: "/notice/newsandnoticesedit/:id",
+    title: "NewsAndNotice",
+    name: "newsandnotice",
+    auth: true,
+    component: NewsAndNotice,
+  },
+  {
+    path: "/notice/newsandnoticesdetail/:id",
+    title: "NewsAndNotice",
+    name: "newsandnotice",
+    component: NewsAndNotice,
+  },
+  {
+    path: "/notice/pressreleaselist",
     title: "Press Release",
     name: "press release",
+    component: PressRelease,
+  },
+  {
+    path: "/notice/pressreleasedetail/:id",
+    title: "Press Release",
+    name: "press release",
+    component: PressRelease,
+  },
+  {
+    path: "/notice/pressreleaseedit/:id",
+    title: "Press Release",
+    name: "press release",
+    auth: true,
     component: PressRelease,
   },
   {
@@ -25,7 +51,7 @@ const noticeRoutes = [
     path: "/notice/eventsedit/:id",
     title: "Events",
     name: "events",
-    auth:true,
+    auth: true,
     component: Events,
   },
   {

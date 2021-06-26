@@ -68,7 +68,7 @@ class NavbarComponent extends Component {
               <NavDropdown.Item href="/notice/eventslist">
                 कार्यक्रमहरू
               </NavDropdown.Item>
-              <NavDropdown.Item href="/notice/pressrelease">
+              <NavDropdown.Item href="/notice/pressreleaselist">
                 प्रेस विज्ञप्ति
               </NavDropdown.Item>
             </NavDropdown>

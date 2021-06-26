@@ -19,6 +19,7 @@ import LoadingAnimation from "./LoadingAnimation";
 import MapContainer from "./Maps";
 import * as EventsSection from "./EventsSection";
 import * as NoticeSection from "./NoticeSection";
+import * as PressreleaseSection from "./PressreleaseSection";
 
 export {
   HeaderComponent,
@@ -42,4 +43,5 @@ export {
   CheckIcon,
   CustomDatePicker,
   EditDropdown,
+  PressreleaseSection
 };
