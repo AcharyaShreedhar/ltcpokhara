@@ -1,8 +1,9 @@
-import { put } from "redux-saga/effects";
 import xmljs from "xml-js";
-
+import { toast } from "react-toastify";
 import { isNil } from "ramda";
 import AdminActions from "../actions/admin";
+import { call,put} from "redux-saga/effects";
+import { history } from "../reducers";
 
 
 export function* fetchalleventsRequest(api, action) {
@@ -98,10 +99,40 @@ export function* updateeventsRequest(api, action) {
     });
     yield call(history.push, "/suchana/eventslist");
     yield put(
-      Actions.updateeventsSuccess(response.data)
+      AdminActions.updateeventsSuccess(response.data)
     );
   } else {
     yield put(AdminActions.updateeventsFailure());
+    toast.error(
+      "तपाईको कार्य सफल हुन सकेन.. कृपया पुनः प्रयास गर्नुहोला !!!!",
+      {
+        position: toast.POSITION.TOP_CENTER,
+      }
+    );
+  }
+}
+
+
+// Delete Events
+export function* deleteeventsRequest(api, action) {
+  const { payload } = action;
+
+  const response = yield api.postAdminEventsDelete(payload);
+
+  if (response.ok) {
+    toast.success("सफलतापुर्वक कार्यक्रम हटाईयो !!!!!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    yield fetchalleventsRequest(api,{
+      name: "event_title",
+      page: 0,
+      perPage: 10,
+    });
+    yield put(
+      AdminActions.deleteeventsSuccess(response.data)
+    );
+  } else {
+    yield put(AdminActions.deleteeventsFailure());
     toast.error(
       "तपाईको कार्य सफल हुन सकेन.. कृपया पुनः प्रयास गर्नुहोला !!!!",
       {

@@ -24,6 +24,10 @@ const { Types, Creators } = createActions({
   updateeventsSuccess: ["response"],
   updateeventsFailure: null,
 
+  deleteeventsRequest: ["payload", "eventId"],
+  deleteeventsSuccess: ["response"],
+  deleteeventsFailure: null,
+
   addstaffRequest: ["payload", "image"],
   addstaffSuccess: ["response"],
   addstaffFailure: null,
