@@ -77,6 +77,41 @@ export function* addeventsRequest(api, action) {
 }
 
 
+//update events
+
+export function* updateeventsRequest(api, action) {
+  const { payload, eventId } = action;
+
+  const response = yield api.postAdminEventsUpdate(
+    payload.events.data,
+    eventId
+  );
+
+  if (response.ok) {
+    toast.success("सफलतापुर्वक कार्यक्रम पुनः प्रविष्ट भयो !!!!!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    yield fetchalleventsRequest(api,{
+      name: "events_title",
+      page: 0,
+      perPage: 10,
+    });
+    yield call(history.push, "/suchana/eventslist");
+    yield put(
+      Actions.updateeventsSuccess(response.data)
+    );
+  } else {
+    yield put(AdminActions.updateeventsFailure());
+    toast.error(
+      "तपाईको कार्य सफल हुन सकेन.. कृपया पुनः प्रयास गर्नुहोला !!!!",
+      {
+        position: toast.POSITION.TOP_CENTER,
+      }
+    );
+  }
+}
+
+
 export function* addstaffRequest(api, action) {
   const { payload, attachment } = action;
 

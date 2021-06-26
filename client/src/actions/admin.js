@@ -20,6 +20,10 @@ const { Types, Creators } = createActions({
   addeventsSuccess: ["response"],
   addeventsFailure: null,
 
+  updateeventsRequest: ["payload", "eventId"],
+  updateeventsSuccess: ["response"],
+  updateeventsFailure: null,
+
   addstaffRequest: ["payload", "image"],
   addstaffSuccess: ["response"],
   addstaffFailure: null,
