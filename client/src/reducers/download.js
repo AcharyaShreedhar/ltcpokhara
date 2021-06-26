@@ -35,6 +35,17 @@ const fetchdownloadsFailure = (state, action) => {
   state.merge({ ...state, status: "error" });
 };
 
+//Add downloads
+const adddownloadsRequest = (state, action) =>
+  state.merge({ ...state, status: "pending" });
+const adddownloadsSuccess = (state, action) =>
+  state.merge({
+    ...state,
+    status: "done",
+  });
+const adddownloadsFailure = (state, action) =>
+  state.merge({ ...state, status: "error" });
+
 const clearRequest = (state, action) =>
   state.merge({ ...state, ...initialState });
 
@@ -47,6 +58,10 @@ export const reducer = createReducer(initialState, {
 [DownloadTypes.FETCHDOWNLOADS_REQUEST]: fetchdownloadsRequest,
 [DownloadTypes.FETCHDOWNLOADS_SUCCESS]: fetchdownloadsSuccess,
 [DownloadTypes.FETCHDOWNLOADS_FAILURE]: fetchdownloadsFailure,
+
+[DownloadTypes.ADDDOWNLOADS_REQUEST]: adddownloadsRequest,
+[DownloadTypes.ADDDOWNLOADS_SUCCESS]: adddownloadsSuccess,
+[DownloadTypes.ADDDOWNLOADS_FAILURE]: adddownloadsFailure,
 
 [DownloadTypes.CLEAR_REQUEST]: clearRequest,
 });

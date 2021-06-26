@@ -15,6 +15,11 @@ fetchdownloadsRequest: ["payload"],
 fetchdownloadsSuccess: ["response"],
 fetchdownloadsFailure: null,
 
+//add a downloads
+adddownloadsRequest: ["payload", "image"],
+adddownloadsSuccess: ["response"],
+adddownloadsFailure: null,
+
   // Clearn all caches
   clearRequest: null,
 });

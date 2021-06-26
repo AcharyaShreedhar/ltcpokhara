@@ -17,7 +17,7 @@ const { Types, Creators } = createActions({
  fetchbooksFailure: null,
 
 //Add books
-addbooksRequest: ["payload"],
+addbooksRequest: ["payload","image"],
 addbooksSuccess: ["response"],
 addbooksFailure: null,
 
