@@ -14,7 +14,7 @@ class SignIn extends Component {
 
   handleLogin() {
     const { username, password } = this.state;
-    this.props.onLogin({ username, password });
+    this.props.onLogin({ user_name:username, user_pass:password });
   }
 
   handleRegister() {
@@ -22,7 +22,7 @@ class SignIn extends Component {
   }
 
   handleUsername(e) {
-    this.setState({ username: e.trim() });
+    this.setState({ username: e });
   }
 
   handlePassword(e) {

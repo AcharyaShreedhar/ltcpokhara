@@ -41,16 +41,9 @@ async function getUsers(req, res) {
 async function addUsers(req, res) {
   const saltRounds = 10;
   const token = util.generateAccessToken({ username: req.body.user_name });
-  const addUsersQuery = `INSERT INTO users (user_type,user_name,user_pass,user_token,created_by,updated_by) values (?,?,?,?,?,?)`;
+  const addUsersQuery = `INSERT INTO users (user_type,user_name,user_pass,user_token) values (?,?,?,?)`;
   bcrypt.hash(req.body.user_pass, saltRounds, function (error, hash) {
-    let values = [
-      req.body.user_type,
-      req.body.user_name,
-      hash,
-      token,
-      req.body.created_by,
-      req.body.updated_by,
-    ]; // query values
+    let values = [req.body.user_type, req.body.user_name, hash, token]; // query values
     // store hash in database
     pool.query(addUsersQuery, values, function (error, results) {
       if (error) throw error;
@@ -65,15 +58,13 @@ async function addUsers(req, res) {
 async function updateUsers(req, res) {
   const saltRounds = 10;
   const token = util.generateAccessToken({ username: req.body.user_name });
-  const updateUsersQuery = `UPDATE users SET user_type=?, user_name=?, user_pass=?,user_token=?,created_by=?,updated_by=? WHERE user_id=?`;
+  const updateUsersQuery = `UPDATE users SET user_type=?, user_name=?, user_pass=?,user_token=? WHERE user_id=?`;
   bcrypt.hash(req.body.user_pass, saltRounds, function (error, hash) {
     let values = [
       req.body.user_type,
       req.body.user_name,
       hash,
       token,
-      req.body.created_by,
-      req.body.updated_by,
       req.params.userId,
     ];
     pool.query(updateUsersQuery, values, function (error, results) {
