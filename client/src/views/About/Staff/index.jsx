@@ -1,14 +1,46 @@
 import React, { Component } from "react";
-import {isNil} from "ramda"
+import { isNil } from "ramda";
 import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
 import { englishToNepaliNumber } from "nepali-number";
+import ReactPaginate from "react-paginate";
+import AdminActions from "../../../actions/admin";
 
 const headings = ["नाम", "पद", "शाखा", "ईमेल", "फोटो"];
 
 class Staff extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { perPage: 10, page: 1 };
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    var staffList = [];
+    if (nextProps != prevState) {
+      staffList = nextProps.staffsData.data.staffs;
+    }
+    const pageCount = !isNil(staffList)
+      ? Math.ceil(staffList.total / nextProps.perPage)
+      : 10;
+
+    const data = !isNil(staffList) ? staffList.list : [];
+
+    return { data, pageCount };
+  }
+
+  handlePageChange(data) {
+    const { perPage } = this.state;
+    this.setState({ page: data.selected });
+
+    this.props.fetchallNotices({
+      name: "notice_publisheddate",
+      page: data.selected * perPage,
+      perPage,
+    });
+  }
   render() {
-    const staffList = isNil(this.props.staffsData)?[]:this.props.staffsData.staffs
+    const { data, pageCount } = this.state;
+
     return (
       <div className="content">
         <div className="titlebar">कर्मचारी</div>
@@ -23,8 +55,8 @@ class Staff extends Component {
               </tr>
             </thead>
             <tbody>
-              {staffList ? (
-                staffList.map((staff, index) => (
+              {data ? (
+                data.map((staff, index) => (
                   <tr>
                     <td>{englishToNepaliNumber(index + 1)}</td>
                     <td key={index}> {staff.staff_name}</td>
@@ -39,6 +71,20 @@ class Staff extends Component {
               )}
             </tbody>
           </Table>
+          <div className="paginationStyle">
+            <ReactPaginate
+              previousLabel={"PREV"}
+              nextLabel={"NEXT"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.handlePageChange}
+              containerClassName={"pagination"}
+              activeClassName={"active"}
+            />
+          </div>
         </div>
       </div>
     );
@@ -46,7 +92,12 @@ class Staff extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  // staffsData: state.admin.staffs.data,
+  staffsData: state.admin.staffs,
 });
 
-export default connect(mapStateToProps, null)(Staff);
+const mapDispatchToProps = (dispatch) => ({
+  fetchallNotices: (payload) =>
+    dispatch(AdminActions.fetchallnoticesRequest(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Staff);
