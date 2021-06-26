@@ -38,7 +38,8 @@ import {
 
 import{
   fetchallpressreleaseRequest,
-  
+  fetchpressreleaseRequest,
+
 }from "./pressrelease";
 
 import { from } from "seamless-immutable";
@@ -77,6 +78,8 @@ export default function* root() {
     takeLatest(DownloadTypes.FETCHALLDOWNLOADS_REQUEST, fetchalldownloadsRequest, api),
     takeLatest(DownloadTypes.FETCHDOWNLOADS_REQUEST, fetchdownloadsRequest, api),
     takeLatest(DownloadTypes.ADDDOWNLOADS_REQUEST, adddownloadsRequest, api),
-    takeLatest(PressReleaseTypes.FETCHALLPRESSRELEASE_REQUEST, fetchallpressreleaseRequest , api)
+    takeLatest(PressReleaseTypes.FETCHALLPRESSRELEASE_REQUEST, fetchallpressreleaseRequest , api),
+    takeLatest(PressReleaseTypes.FETCHALLPRESSRELEASE_REQUEST, fetchallpressreleaseRequest , api),
+    takeLatest(PressReleaseTypes.FETCHPRESSRELEASE_REQUEST, fetchpressreleaseRequest , api)
   ]);
 }
