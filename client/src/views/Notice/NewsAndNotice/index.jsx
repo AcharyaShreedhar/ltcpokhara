@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { isNil, equals } from "ramda";
+import { isEmpty, isNil, equals } from "ramda";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { NoticeSection } from "../../../components";
@@ -12,6 +12,7 @@ class NewsAndNotice extends Component {
     super(props);
     this.state = { loc: "newsandnoticelist", perPage: 10, page: 1 };
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.handleSelectMenu = this.handleSelectMenu.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -42,6 +43,13 @@ class NewsAndNotice extends Component {
 
   handleSelectMenu(event, item) {
     switch (event) {
+      case "detail view": {
+        this.props.history.push({
+          pathname: `/notice/newsandnoticesdetail/${item.notice_id}`,
+          item,
+        });
+        break;
+      }
       case "edit": {
         this.props.history.push({
           pathname: `/notices/newsandnoticesedit/${item.notice_id}`,
@@ -61,6 +69,7 @@ class NewsAndNotice extends Component {
 
   render() {
     const { data, pageCount, loc } = this.state;
+    const { token } = this.props;
     return (
       <div>
         {equals(loc, "newsandnoticeslist") && (
@@ -68,20 +77,21 @@ class NewsAndNotice extends Component {
             title="कार्यक्रमहरू सम्बन्धि विवरण"
             pageCount={pageCount}
             data={data}
+            authenticated={!isEmpty(token)}
             headings={headings}
             onSelect={this.handleSelectMenu}
             onPageClick={(e) => this.handlePageChange(e)}
           />
         )}
 
-        {equals(loc, "newsandnoticesedit") && (
-          <NoticeSection.Edit
+        {equals(loc, "newsandnoticesdetail") && (
+          <NoticeSection.Detail
             title="कार्यक्रमको बिस्तृत विवरण"
             history={this.props.history}
             onSelect={this.handleSelectMenu}
           />
         )}
-        {equals(loc, "newsandnoticesdetail") && (
+        {equals(loc, "newsandnoticesedit") && !isEmpty(token) && (
           <NoticeSection.Edit
             title="कार्यक्रमहरू पुनः प्रविष्ट"
             history={this.props.history}
@@ -103,6 +113,7 @@ NewsAndNotice.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
+  token: state.app.token,
   eventsData: state.admin.alleventsData,
 });
 const mapDispatchToProps = (dispatch) => ({

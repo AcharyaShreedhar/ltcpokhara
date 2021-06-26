@@ -1,23 +1,22 @@
 import React, { Component } from "react";
-import { isNil } from "ramda";
+import { isEmpty, isNil, equals } from "ramda";
 import { PropTypes } from "prop-types";
-import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
-import { isEmpty } from "ramda";
-import { englishToNepaliNumber } from "nepali-number";
-import ReactPaginate from "react-paginate";
+import { PressreleaseSection } from "../../../components";
 import AdminActions from "../../../actions/admin";
 
-const headings = ["शीर्षक", "रुजुकर्ता", "प्रकाशीत मिति", ""];
+const headings = ["शीर्षक", "कार्यक्रम बिवरण ", "रुजुकर्ता", "मिति", "फाइल"];
 
 class PressRelease extends Component {
   constructor(props) {
     super(props);
-    this.state = { perPage: 10, page: 1 };
+    this.state = { loc: "pressreleaselist", perPage: 10, page: 1 };
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.handleSelectMenu = this.handleSelectMenu.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    const loc = nextProps.location.pathname.split("/")[2];
     var pressreleaseList = [];
     if (nextProps != prevState) {
       pressreleaseList = nextProps.pressreleaseData.data;
@@ -28,68 +27,77 @@ class PressRelease extends Component {
 
     const data = !isNil(pressreleaseList) ? pressreleaseList.list : [];
 
-    return { data, pageCount };
+    return { data, pageCount, loc };
   }
 
   handlePageChange(data) {
     const { perPage } = this.state;
     this.setState({ page: data.selected });
 
-    this.props.fetchallPressReleases({
-      name: "published_date",
+    this.props.fetchallPressRelease({
+      name: "pressrelease_date",
       page: data.selected * perPage,
       perPage,
     });
   }
+
+  handleSelectMenu(event, item) {
+    switch (event) {
+      case "detail view": {
+        this.props.history.push({
+          pathname: `/notice/pressreleasedetail/${item.event_id}`,
+          item,
+        });
+        break;
+      }
+      case "edit": {
+        this.props.history.push({
+          pathname: `/notice/pressreleaseedit/${item.event_id}`,
+          item,
+        });
+        break;
+      }
+
+      case "delete": {
+        this.props.deletepressrelease(item.event_id);
+        break;
+      }
+      default:
+        break;
+    }
+  }
+
   render() {
-    const { data, pageCount } = this.state;
+    const { data, pageCount, loc } = this.state;
+    const { token } = this.props;
 
     return (
-      <div className="content">
-        <div className="titlebar">प्रेस विज्ञप्ति</div>
-        <div>
-          <Table responsive striped bordered hover>
-            <thead>
-              <tr>
-                <th>क्र.स.</th>
-                {headings.map((heading, index) => (
-                  <th key={index}>{heading}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {!isEmpty(data) ? (
-                data.map((pressRelease, index) => (
-                  <tr>
-                    <td>{englishToNepaliNumber(index + 1)}</td>
-                    <td key={index}> {pressRelease.notice_title}</td>
-                    <td key={index}> {pressRelease.notice_approvedby}</td>
-                    <td key={index}> {pressRelease.notice_date}</td>
-                    <td key={index}> {pressRelease.notice_file}</td>
-                  </tr>
-                ))
-              ) : (
-                <div className="text-center w-100">
-                  कुनै विवरण उपलब्द छैन !!!
-                </div>
-              )}
-            </tbody>
-          </Table>
-          <div className="paginationStyle">
-            <ReactPaginate
-              previousLabel={"PREV"}
-              nextLabel={"NEXT"}
-              breakLabel={"..."}
-              breakClassName={"break-me"}
-              pageCount={pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={this.handlePageChange}
-              containerClassName={"pagination"}
-              activeClassName={"active"}
-            />
-          </div>
-        </div>
+      <div>
+        {equals(loc, "pressreleaselist") && (
+          <PressreleaseSection.List
+            title="कार्यक्रमहरू सम्बन्धि विवरण"
+            pageCount={pageCount}
+            data={data}
+            authenticated={!isEmpty(token)}
+            headings={headings}
+            onSelect={this.handleSelectMenu}
+            onPageClick={(e) => this.handlePageChange(e)}
+          />
+        )}
+
+        {equals(loc, "pressreleasedetail") && (
+          <PressreleaseSection.Detail
+            title="कार्यक्रमको बिस्तृत विवरण"
+            history={this.props.history}
+          />
+        )}
+        {equals(loc, "pressreleaseedit") && !isEmpty(token) && (
+          <PressreleaseSection.Edit
+            title="कार्यक्रमहरू पुनः प्रविष्ट"
+            history={this.props.history}
+            onUpdate={(e, id) => this.props.updatePressRelease(e, id)}
+          />
+        )}
       </div>
     );
   }
@@ -104,12 +112,18 @@ PressRelease.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  pressreleaseData: state.admin.pressrelease,
+  token: state.app.token,
+  pressreleaseData: state.admin.alleventsData,
 });
-
 const mapDispatchToProps = (dispatch) => ({
-  fetchallPressReleases: (payload) =>
-    dispatch(AdminActions.fetchallpressreleasesRequest(payload)),
+  fetchallPressRelease: (payload) =>
+    dispatch(AdminActions.fetchallpressreleaseRequest(payload)),
+
+  updatePressRelease: (payload, eventId) =>
+    dispatch(AdminActions.updatepressreleaseRequest(payload, eventId)),
+
+  deletePressRelease: (eventId) =>
+    dispatch(AdminActions.deletepressreleaseRequest(eventId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PressRelease);
