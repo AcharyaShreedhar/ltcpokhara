@@ -19,4 +19,17 @@ export function* fetchallpressreleaseRequest(api, action) {
   }
 }
 
-
+//---------------fetchpressreleaseerquest
+export function* fetchpressreleaseRequest(api, action) {
+    const  pressreleaseId  = action.payload
+  
+    const response = yield api.getPressRelease(pressreleaseId);
+    
+    if (response.ok) {
+      yield put(
+      PressReleaseActions.fetchpressreleaseSuccess(response.data)
+      );
+    } else {
+      yield put(PressReleaseActions.fetchpressreleaseFailure());
+    }
+  }
