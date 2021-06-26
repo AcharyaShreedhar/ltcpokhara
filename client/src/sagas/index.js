@@ -11,12 +11,14 @@ import {
   addeventsRequest,
   updateeventsRequest,
   deleteeventsRequest,
+  fetchallstaffRequest,
+  fetchstaffRequest,
   addstaffRequest,
   addnoticeRequest,
   addpublicationRequest,
   fetchnoticeRequest,
   fetchpublicationRequest,
-  fetchstaffRequest,
+  
 } from "./admin";
 import {
   fetchallbooksRequest,
@@ -38,6 +40,8 @@ export default function* root() {
     takeLatest(AdminTypes.ADDEVENTS_REQUEST, addeventsRequest, api),
     takeLatest(AdminTypes.UPDATEEVENTS_REQUEST, updateeventsRequest, api),
     takeLatest(AdminTypes.DELETEEVENTS_REQUEST, deleteeventsRequest, api),
+    takeLatest(AdminTypes.FETCHALLSTAFF_REQUEST, fetchallstaffRequest, api),
+    takeLatest(AdminTypes.FETCHSTAFF_REQUEST, fetchstaffRequest, api),
     takeLatest(AdminTypes.ADDSTAFF_REQUEST, addstaffRequest, api),
     takeLatest(AdminTypes.ADDNOTICE_REQUEST, addnoticeRequest, api),
     takeLatest(AdminTypes.ADDPUBLICATION_REQUEST, addpublicationRequest, api),
@@ -48,7 +52,6 @@ export default function* root() {
       fetchpublicationRequest,
       api
     ),
-    takeLatest(AdminTypes.FETCHSTAFF_REQUEST, fetchstaffRequest, api),
     takeLatest(PublicationTypes.FETCHALLBOOKS_REQUEST, fetchallbooksRequest, api),
     takeLatest(PublicationTypes.FETCHBOOKS_REQUEST, fetchbooksRequest, api),
     takeLatest(PublicationTypes.ADDBOOKS_REQUEST, addbooksRequest, api),

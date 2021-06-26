@@ -66,6 +66,11 @@ const create = (baseURL = Config.API_URL) => {
   const postAdminEventsDelete = (eventId) =>
     api.delete(`events/${eventId}`);
 
+  const getStaffList = (payload) => api.post("staffs", payload);
+
+  const getStaff = (staffId) =>
+    api.get(`staffs/${staffId}`);
+
   const postAdminStaffSave = (payload) => api.post("staffs", payload);
 
   const postAdminNoticeSave = (payload) => api.post("notices", payload);
@@ -75,7 +80,6 @@ const create = (baseURL = Config.API_URL) => {
 
   const getAdminNotice = () => api.get("notices");
   const getAdminPublication = () => api.get("publications");
-  const getAdminStaff = () => api.get("staffs");
   const getBooksList = (payload) => api.post("booksList", payload);
   const getBooks = (bookId) =>api.get(`books/${bookId}`);
   const postPublicationBooksSave = (payload) =>api.post("books", payload);
@@ -91,13 +95,14 @@ const create = (baseURL = Config.API_URL) => {
     postAdminEventsSave,
     postAdminEventsUpdate,
     postAdminEventsDelete,
+    getStaffList,
+    getStaff,
     postAdminStaffSave,
     postAdminNoticeSave,
     postAdminPublicationSave,
 
     getAdminNotice,
     getAdminPublication,
-    getAdminStaff,
     getBooksList,
     getBooks,
     postPublicationBooksSave,
