@@ -90,6 +90,7 @@ const create = (baseURL = Config.API_URL) => {
     api.get(`nideshikakaryabidhi/${nirdeshikaId}`);
   const getDownloadsList = (payload) => api.post("downloadsList", payload);
   const getDownloads = (downloadId) => api.get(`downloads/${downloadId}`);
+  const postDownloadsSave = (payload) =>api.post("downloads", payload);
 
   return {
     loginByUsername,
@@ -115,6 +116,7 @@ const create = (baseURL = Config.API_URL) => {
     getNirdesika,
     getDownloadsList,
     getDownloads,
+    postDownloadsSave,
   };
 };
 
