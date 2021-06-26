@@ -33,7 +33,16 @@ const fetchbooksSuccess = (state, action) => {
 const fetchbooksFailure = (state, action) => {
   state.merge({ ...state, status: "error" });
 };
-
+//Add books
+const addbooksRequest = (state, action) =>
+  state.merge({ ...state, status: "pending" });
+const addbooksSuccess = (state, action) =>
+  state.merge({
+    ...state,
+    status: "done",
+  });
+const addbooksFailure = (state, action) =>
+  state.merge({ ...state, status: "error" });
 
 
 const clearRequest = (state, action) =>
@@ -49,6 +58,10 @@ export const reducer = createReducer(initialState, {
 [PublicationTypes.FETCHBOOKS_REQUEST]: fetchbooksRequest,
 [PublicationTypes.FETCHBOOKS_SUCCESS]: fetchbooksSuccess,
 [PublicationTypes.FETCHBOOKS_FAILURE]: fetchbooksFailure,
+//Add books
+[PublicationTypes.ADDBOOKS_REQUEST]: addbooksRequest,
+[PublicationTypes.ADDBOOKS_SUCCESS]: addbooksSuccess,
+[PublicationTypes.ADDBOOKS_FAILURE]: addbooksFailure,
 
 [PublicationTypes.CLEAR_REQUEST]: clearRequest,
 });
