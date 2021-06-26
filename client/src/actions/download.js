@@ -10,7 +10,10 @@ const { Types, Creators } = createActions({
  fetchalldownloadsRequest: ["payload"],
  fetchalldownloadsSuccess: ["response"],
  fetchalldownloadsFailure: null,
-
+// fetching a download
+fetchdownloadsRequest: ["payload"],
+fetchdownloadsSuccess: ["response"],
+fetchdownloadsFailure: null,
 
   // Clearn all caches
   clearRequest: null,
