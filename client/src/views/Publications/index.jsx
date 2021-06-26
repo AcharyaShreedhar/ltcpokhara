@@ -13,6 +13,11 @@ class Publications extends Component {
       page: 0,
       perPage: 10,
     });
+    this.props.fetchallProcedures({
+      name: "nirdeshika_miti",
+      page: 0,
+      perPage: 10,
+    });
   }
   render() {
     return (
@@ -49,6 +54,8 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({
   fetchallBooks: (payload) =>
     dispatch(PublicationActions.fetchallbooksRequest(payload)),
+  fetchallProcedures: (payload) =>
+    dispatch(PublicationActions.fetchallnirdesikaRequest(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Publications);

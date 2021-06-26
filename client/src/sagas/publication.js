@@ -10,7 +10,7 @@ export function* fetchallbooksRequest(api, action) {
   const { payload } = action;
   const payloaddata = isNil(payload) ? action : payload;
   const response = yield api.getBooksList(payloaddata);
-console.log('resp',response)
+
   if (response.ok) {
     yield put(PublicationActions.fetchallbooksSuccess(response.data));
   } else {
@@ -19,14 +19,12 @@ console.log('resp',response)
 }
 
 export function* fetchbooksRequest(api, action) {
-  const  bookId  = action.payload
+  const bookId = action.payload;
 
   const response = yield api.getBooks(bookId);
-  
+
   if (response.ok) {
-    yield put(
-    PublicationActions.fetchbooksSuccess(response.data)
-    );
+    yield put(PublicationActions.fetchbooksSuccess(response.data));
   } else {
     yield put(PublicationActions.fetchbooksFailure());
   }
