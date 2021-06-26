@@ -17,7 +17,7 @@ class Edit extends Component {
       event_cat: props.history.location.item.event_cat,
       event_content: props.history.location.item.event_content,
       event_date: props.history.location.item.event_date,
-      event_approvedby: props.history.location.item.event_approvedby,
+      approved_by: props.history.location.item.approved_by,
       event_file: props.history.location.item.event_file,
       attachment: "",
     };
@@ -33,7 +33,7 @@ class Edit extends Component {
       event_cat,
       event_content,
       event_date,
-      event_approvedby,
+      approved_by,
       event_file,
       attachment,
     } = this.state;
@@ -44,7 +44,7 @@ class Edit extends Component {
           event_cat: event_cat,
           event_content: event_content,
           event_date: event_date,
-          event_approvedby: event_approvedby,
+          approved_by: approved_by,
           event_file: attachment.name || event_file,
         },
       },
@@ -70,7 +70,7 @@ class Edit extends Component {
       event_content,
       event_cat,
       event_date,
-      event_approvedby,
+      approved_by,
       event_file,
       attachment,
     } = this.state;
@@ -110,10 +110,10 @@ class Edit extends Component {
           </Form.Group>
           <Input
             className="mb-4"
-            title="शीर्षक "
-            value={event_approvedby}
+            title="रुजुकर्ता"
+            value={approved_by}
             direction="vertical"
-            onChange={(e) => this.setState({ event_approvedby: e })}
+            onChange={(e) => this.setState({ approved_by: e })}
           />
           <span className="dsl-b18">प्रकाशित मिति</span>
           <NepaliDatePicker
@@ -160,7 +160,7 @@ class Edit extends Component {
 
 Edit.propTypes = {
   event_title: PropTypes.string,
-  event_approvedby: PropTypes.string,
+  approved_by: PropTypes.string,
   event_date: PropTypes.string,
   event_cat: PropTypes.string,
   onSubmit: PropTypes.func,
@@ -170,7 +170,7 @@ Edit.defaultProps = {
   event_title: "",
   event_cat: "",
   event_date: "",
-  event_approvedby: "",
+  approved_by: "",
 
   OnSubmit: () => {},
 };

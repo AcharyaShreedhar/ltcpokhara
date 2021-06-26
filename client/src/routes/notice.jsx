@@ -25,6 +25,7 @@ const noticeRoutes = [
     path: "/notice/eventsedit/:id",
     title: "Events",
     name: "events",
+    auth:true,
     component: Events,
   },
   {

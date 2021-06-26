@@ -83,9 +83,6 @@ class NavbarComponent extends Component {
               <NavDropdown.Item href="/publications/procedures">
                 निर्देशिका / कार्यविधि
               </NavDropdown.Item>
-              <NavDropdown.Item href="/publications/downloads">
-                अन्य डाउनलोड
-              </NavDropdown.Item>
               <NavDropdown.Item href="/publications/books">
                 हाते पुस्तिका
               </NavDropdown.Item>
