@@ -4,7 +4,7 @@ import { AppTypes } from "../actions/app";
 import { AdminTypes } from "../actions/admin";
 import { PublicationTypes} from "../actions/publication";
 import { DownloadTypes} from "../actions/download";
-
+import { PressReleaseTypes } from "../actions/pressRelease";
 import { loginRequest, logoutRequest } from "./app";
 import {
   fetchalleventsRequest,
@@ -35,6 +35,13 @@ import {
   fetchdownloadsRequest,
   adddownloadsRequest,
 } from "./download";
+
+import{
+  fetchallpressreleaseRequest,
+  
+}from "./pressrelease";
+
+import { from } from "seamless-immutable";
 
 const api = API.create();
 
@@ -70,5 +77,6 @@ export default function* root() {
     takeLatest(DownloadTypes.FETCHALLDOWNLOADS_REQUEST, fetchalldownloadsRequest, api),
     takeLatest(DownloadTypes.FETCHDOWNLOADS_REQUEST, fetchdownloadsRequest, api),
     takeLatest(DownloadTypes.ADDDOWNLOADS_REQUEST, adddownloadsRequest, api),
+    takeLatest(PressReleaseTypes.FETCHALLPRESSRELEASE_REQUEST, fetchallpressreleaseRequest , api)
   ]);
 }
