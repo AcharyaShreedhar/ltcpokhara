@@ -55,21 +55,18 @@ const create = (baseURL = Config.API_URL) => {
   //EVENTS
   const getEventsList = (payload) => api.post("eventsList", payload);
 
-  const getEvents = (eventId) =>
-    api.get(`events/${eventId}`);
+  const getEvents = (eventId) => api.get(`events/${eventId}`);
 
   const postAdminEventsSave = (payload) => api.post("events", payload);
 
   const postAdminEventsUpdate = (payload, eventId) =>
     api.put(`events/${eventId}`, payload);
 
-  const postAdminEventsDelete = (eventId) =>
-    api.delete(`events/${eventId}`);
+  const postAdminEventsDelete = (eventId) => api.delete(`events/${eventId}`);
 
   const getStaffList = (payload) => api.post("staffs", payload);
 
-  const getStaff = (staffId) =>
-    api.get(`staffs/${staffId}`);
+  const getStaff = (staffId) => api.get(`staffs/${staffId}`);
 
   const postAdminStaffSave = (payload) => api.post("staffs", payload);
 
@@ -81,13 +78,15 @@ const create = (baseURL = Config.API_URL) => {
   const getAdminNotice = () => api.get("notices");
   const getAdminPublication = () => api.get("publications");
   const getBooksList = (payload) => api.post("booksList", payload);
-  const getBooks = (bookId) =>api.get(`books/${bookId}`);
-  const postPublicationBooksSave = (payload) =>api.post("books", payload);
-  const getNirdesikaList = (payload) => api.post("nirdeshikakaryabidhiList", payload);
-  const getNirdesika = (nirdeshikaId) => api.get(`nideshikakaryabidhi/${nirdeshikaId}`);
+
+  const getBooks = (bookId) => api.get(`books/${bookId}`);
+  const postPublicationBooksSave = (payload) => api.post("books", payload);
+  const getNirdesikaList = (payload) =>
+    api.post("nirdeshikakaryabidhiList", payload);
+  const getNirdesika = (nirdeshikaId) =>
+    api.get(`nideshikakaryabidhi/${nirdeshikaId}`);
   const getDownloadsList = (payload) => api.post("downloadsList", payload);
   const getDownloads = (downloadId) => api.get(`downloads/${downloadId}`);
-
 
   return {
     loginByUsername,

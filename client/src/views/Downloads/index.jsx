@@ -3,7 +3,7 @@ import { isEmpty, equals, isNil } from "ramda";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { DownloadsSection } from "../../components";
-import DownloadActions from "../../actions/publication";
+import DownloadActions from "../../actions/download";
 
 const headings = ["शीर्षक", "प्रकाशित मिति", "फाइल"];
 
@@ -35,7 +35,7 @@ class Downloads extends Component {
     const { perPage } = this.state;
     this.setState({ page: data.selected });
 
-    this.props.fetchalldownloads({
+    this.props.fetchallDownloads({
       name: "published_date",
       page: data.selected * perPage,
       perPage,
@@ -114,7 +114,7 @@ Downloads.defaultProps = {
 
 const mapStateToProps = (state) => ({
   token: state.app.token,
-  downloadsData: state.publication.allbooksData,
+  downloadsData: state.download.alldownloadsData,
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchallDownloads: (payload) =>

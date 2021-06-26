@@ -5,27 +5,25 @@ import { isNil } from "ramda";
 import DownloadActions from "../actions/download";
 
 export function* fetchalldownloadsRequest(api, action) {
-    const { payload } = action;
-    const payloaddata = isNil(payload) ? action : payload;
-    const response = yield api.getDownloadsList(payloaddata);
-  console.log('resp',response)
-    if (response.ok) {
-      yield put(DownloadActions.fetchalldownloadsSuccess(response.data));
-    } else {
-      yield put(DownloadActions.fetchalldownloadsFailure());
-    }
-  }
+  const { payload } = action;
+  const payloaddata = isNil(payload) ? action : payload;
+  const response = yield api.getDownloadsList(payloaddata);
 
-  export function* fetchdownloadsRequest(api, action) {
-    const  downloadId  = action.payload
-  
-    const response = yield api.getDownloads(downloadId);
-    
-    if (response.ok) {
-      yield put(
-      DownloadActions.fetchdownloadsSuccess(response.data)
-      );
-    } else {
-      yield put(DownloadActions.fetchdownloadsFailure());
-    }
+  if (response.ok) {
+    yield put(DownloadActions.fetchalldownloadsSuccess(response.data));
+  } else {
+    yield put(DownloadActions.fetchalldownloadsFailure());
   }
+}
+
+export function* fetchdownloadsRequest(api, action) {
+  const downloadId = action.payload;
+
+  const response = yield api.getDownloads(downloadId);
+
+  if (response.ok) {
+    yield put(DownloadActions.fetchdownloadsSuccess(response.data));
+  } else {
+    yield put(DownloadActions.fetchdownloadsFailure());
+  }
+}

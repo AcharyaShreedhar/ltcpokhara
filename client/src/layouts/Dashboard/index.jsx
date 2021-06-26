@@ -13,6 +13,7 @@ import {
 import { Content } from "./dashboard";
 import AppActions from "../../actions/app";
 import AdminActions from "../../actions/admin";
+import DownloadActions from "../../actions/download";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -26,9 +27,12 @@ class Dashboard extends Component {
       };
       this.props.saveLocation(payload);
     });
-    this.props.fetchNotice();
-    this.props.fetchPublication();
-    this.props.fetchStaff();
+
+    this.props.fetchallDownloads({
+      name: "published_date",
+      page: 0,
+      perPage: 10,
+    });
   }
 
   render() {
@@ -69,15 +73,15 @@ Dashboard.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  isBusy: equals(state.admin.status, "pending"),
+  isBusy: equals(state.download.status, "pending"),
   token: state.app.token,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   saveLocation: (e) => dispatch(AppActions.locationsRequest(e)),
-  fetchNotice: () => dispatch(AdminActions.fetchnoticeRequest()),
-  fetchPublication: () => dispatch(AdminActions.fetchpublicationRequest()),
-  fetchStaff: () => dispatch(AdminActions.fetchstaffRequest()),
+
+  fetchallDownloads: (payload) =>
+    dispatch(DownloadActions.fetchalldownloadsRequest(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
