@@ -7,7 +7,15 @@ import { Table } from "react-bootstrap";
 import { Button, EditDropdown } from "../../components";
 
 function List(props) {
-  const { headings, data, title, onSelect, pageCount, onPageClick } = props;
+  const {
+    authenticated,
+    headings,
+    data,
+    title,
+    onSelect,
+    pageCount,
+    onPageClick,
+  } = props;
   return (
     <Fragment>
       <div className="titlebar">{title}</div>
@@ -27,16 +35,25 @@ function List(props) {
               <td>{englishToNepaliNumber(index + 1)}</td>
               <td key={index}> {event.event_title}</td>
               <td key={index}> {event.event_content}</td>
-              <td key={index}> {event.event_approved_by}</td>
+              <td key={index}> {event.approved_by}</td>
               <td key={index}> {event.event_date}</td>
               <td key={index}> {event.event_file}</td>
               <td>
-                <div className="edit">
-                  <EditDropdown
-                    options={["Detail View", "Edit", "Delete"]}
-                    onChange={(e) => onSelect(e, event)}
-                  />
-                </div>
+                {authenticated ? (
+                  <div className="edit">
+                    <EditDropdown
+                      options={["Detail View", "Edit", "Delete"]}
+                      onChange={(e) => onSelect(e, event)}
+                    />
+                  </div>
+                ) : (
+                  <div className="edit">
+                    <EditDropdown
+                      options={["Detail View"]}
+                      onChange={(e) => onSelect(e, event)}
+                    />
+                  </div>
+                )}
               </td>
             </tr>
           ))}

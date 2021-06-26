@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { isNil, equals } from "ramda";
+import { isEmpty, isNil, equals } from "ramda";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { EventsSection } from "../../../components";
@@ -69,6 +69,7 @@ class Events extends Component {
 
   render() {
     const { data, pageCount, loc } = this.state;
+    const { token } = this.props;
 
     return (
       <div>
@@ -77,6 +78,7 @@ class Events extends Component {
             title="कार्यक्रमहरू सम्बन्धि विवरण"
             pageCount={pageCount}
             data={data}
+            authenticated={!isEmpty(token)}
             headings={headings}
             onSelect={this.handleSelectMenu}
             onPageClick={(e) => this.handlePageChange(e)}
@@ -89,7 +91,7 @@ class Events extends Component {
             history={this.props.history}
           />
         )}
-        {equals(loc, "eventsedit") && (
+        {equals(loc, "eventsedit") && !isEmpty(token) && (
           <EventsSection.Edit
             title="कार्यक्रमहरू पुनः प्रविष्ट"
             history={this.props.history}
@@ -110,6 +112,7 @@ Events.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
+  token: state.app.token,
   eventsData: state.admin.alleventsData,
 });
 const mapDispatchToProps = (dispatch) => ({
