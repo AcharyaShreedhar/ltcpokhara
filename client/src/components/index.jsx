@@ -20,6 +20,7 @@ import MapContainer from "./Maps";
 import * as EventsSection from "./EventsSection";
 import * as NoticeSection from "./NoticeSection";
 import * as PressreleaseSection from "./PressreleaseSection";
+import * as BooksSection from "./BooksSection";
 
 export {
   HeaderComponent,
@@ -43,5 +44,6 @@ export {
   CheckIcon,
   CustomDatePicker,
   EditDropdown,
-  PressreleaseSection
+  PressreleaseSection,
+  BooksSection,
 };

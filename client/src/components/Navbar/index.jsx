@@ -80,10 +80,10 @@ class NavbarComponent extends Component {
               id="collasible-nav-dropdown"
               className="pr-5"
             >
-              <NavDropdown.Item href="/publications/procedures">
+              <NavDropdown.Item href="/publications/procedureslist">
                 निर्देशिका / कार्यविधि
               </NavDropdown.Item>
-              <NavDropdown.Item href="/publications/books">
+              <NavDropdown.Item href="/publications/bookslist">
                 हाते पुस्तिका
               </NavDropdown.Item>
             </NavDropdown>
