@@ -82,7 +82,8 @@ const create = (baseURL = Config.API_URL) => {
 
 
     const getPressReleaseList = (payload) => api.post("pressReleaseList", payload);
-    const getPressRelease = (pressreleaseId) =>api.get(`pressRelease/${pressReleaseId}`)
+    const getPressRelease = (pressReleaseId) =>api.get(`pressRelease/${pressReleaseId}`);
+    const postPressReleaseSave = (payload) =>api.post("pressRelease", payload);
 
   
 
@@ -128,7 +129,8 @@ const create = (baseURL = Config.API_URL) => {
     postDownloadsSave,
 
     getPressReleaseList,
-    getPressRelease
+    getPressRelease,
+    postPressReleaseSave
   };
 };
 
