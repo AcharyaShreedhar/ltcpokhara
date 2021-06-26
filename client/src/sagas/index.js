@@ -30,6 +30,7 @@ import {
 } from "./publication";
 import {
   fetchalldownloadsRequest,
+  fetchdownloadsRequest,
 } from "./download";
 
 const api = API.create();
@@ -62,5 +63,6 @@ export default function* root() {
     takeLatest(PublicationTypes.FETCHALLNIRDESIKA_REQUEST, fetchallnirdesikaRequest, api),
     takeLatest(PublicationTypes.FETCHNIRDESIKA_REQUEST, fetchnirdesikaRequest, api),
     takeLatest(DownloadTypes.FETCHALLDOWNLOADS_REQUEST, fetchalldownloadsRequest, api),
+    takeLatest(DownloadTypes.FETCHDOWNLOADS_REQUEST, fetchdownloadsRequest, api),
   ]);
 }

@@ -15,3 +15,17 @@ export function* fetchalldownloadsRequest(api, action) {
       yield put(DownloadActions.fetchalldownloadsFailure());
     }
   }
+
+  export function* fetchdownloadsRequest(api, action) {
+    const  downloadId  = action.payload
+  
+    const response = yield api.getDownloads(downloadId);
+    
+    if (response.ok) {
+      yield put(
+      DownloadActions.fetchdownloadsSuccess(response.data)
+      );
+    } else {
+      yield put(DownloadActions.fetchdownloadsFailure());
+    }
+  }
