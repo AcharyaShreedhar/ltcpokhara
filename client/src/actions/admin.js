@@ -28,17 +28,21 @@ const { Types, Creators } = createActions({
   deleteeventsSuccess: ["response"],
   deleteeventsFailure: null,
 
-  addstaffRequest: ["payload", "image"],
-  addstaffSuccess: ["response"],
-  addstaffFailure: null,
-
   fetchallstaffRequest: ["payload"],
   fetchallstaffSuccess: ["response"],
   fetchallstaffFailure: null,
 
-  fetchstaffRequest: null,
-  fetchstaffSuccess: ['response'],
+  fetchstaffRequest: ["payload"],
+  fetchstaffSuccess: ["response"],
   fetchstaffFailure: null,
+
+  addstaffRequest: ["payload", "image"],
+  addstaffSuccess: ["response"],
+  addstaffFailure: null,
+
+  updatestaffRequest: ["payload", "staffId"],
+  updatestaffSuccess: ["response"],
+  updatestaffFailure: null,
 
   addnoticeRequest: ["payload", "image"],
   addnoticeSuccess: ["response"],

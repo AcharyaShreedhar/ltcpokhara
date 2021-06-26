@@ -70,6 +70,9 @@ const create = (baseURL = Config.API_URL) => {
 
   const postAdminStaffSave = (payload) => api.post("staffs", payload);
 
+  const postAdminStaffUpdate = (payload, staffId) =>
+    api.put(`staffs/${staffId}`, payload);
+
   const postAdminNoticeSave = (payload) => api.post("notices", payload);
 
   const postAdminPublicationSave = (payload) =>
@@ -99,6 +102,7 @@ const create = (baseURL = Config.API_URL) => {
     getStaffList,
     getStaff,
     postAdminStaffSave,
+    postAdminStaffUpdate,
     postAdminNoticeSave,
     postAdminPublicationSave,
 
