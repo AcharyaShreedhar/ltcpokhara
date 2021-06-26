@@ -21,6 +21,7 @@ import * as EventsSection from "./EventsSection";
 import * as NoticeSection from "./NoticeSection";
 import * as PressreleaseSection from "./PressreleaseSection";
 import * as BooksSection from "./BooksSection";
+import * as NirdesikaSection from "./NirdesikaSection";
 
 export {
   HeaderComponent,
@@ -46,4 +47,5 @@ export {
   EditDropdown,
   PressreleaseSection,
   BooksSection,
+  NirdesikaSection,
 };

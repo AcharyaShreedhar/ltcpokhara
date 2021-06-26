@@ -9,6 +9,18 @@ const publicationsRoutes = [
     component: Procedures,
   },
   {
+    path: "/publications/proceduredetail/:id",
+    title: "Procedures",
+    name: "procedures",
+    component: Procedures,
+  },
+  {
+    path: "/publications/procedureedit/:id",
+    title: "Procedures",
+    name: "procedures",
+    component: Procedures,
+  },
+  {
     path: "/publications/bookslist",
     title: "Books",
     name: "books",
@@ -18,7 +30,7 @@ const publicationsRoutes = [
     path: "/publications/booksedit/:id",
     title: "Books",
     name: "books",
-    auth:true,
+    auth: true,
     component: Books,
   },
   {
