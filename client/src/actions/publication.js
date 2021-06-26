@@ -26,6 +26,11 @@ fetchallnirdesikaRequest: ["payload"],
 fetchallnirdesikaSuccess: ["response"],
 fetchallnirdesikaFailure: null,
 
+//fetch all  nirdesika
+fetchnirdesikaRequest: ["payload"],
+fetchnirdesikaSuccess: ["response"],
+fetchnirdesikaFailure: null,
+
  // Clearn all caches
  clearRequest: null,
 });

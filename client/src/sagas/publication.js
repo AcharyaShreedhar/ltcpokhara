@@ -89,3 +89,17 @@ export function* fetchallnirdesikaRequest(api, action) {
     yield put(PublicationActions.fetchallnirdesikaFailure());
   }
 }
+
+export function* fetchnirdesikaRequest(api, action) {
+  const  nirdeshikaId  = action.payload
+
+  const response = yield api.getNirdesika(nirdeshikaId);
+  
+  if (response.ok) {
+    yield put(
+    PublicationActions.fetchnirdesikaSuccess(response.data)
+    );
+  } else {
+    yield put(PublicationActions.fetchnirdesikaFailure());
+  }
+}
