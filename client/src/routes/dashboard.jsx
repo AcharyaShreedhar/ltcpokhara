@@ -35,7 +35,17 @@ const dashboardRoutes = [
     component: Notice,
   },
   {
-    path: "/downloads",
+    path: "/downloadslist",
+    name: "/Downloads",
+    component: Downloads,
+  },
+  {
+    path: "/downloadedit/:id",
+    name: "/Downloads",
+    component: Downloads,
+  },
+  {
+    path: "/downloaddetail/:id",
     name: "/Downloads",
     component: Downloads,
   },

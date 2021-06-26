@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { history } from "../reducers";
 import { isNil } from "ramda";
 import PublicationActions from "../actions/publication";
-import Books from "../views/Publications/Books";
 
 export function* fetchallbooksRequest(api, action) {
   const { payload } = action;
@@ -89,14 +88,12 @@ export function* fetchallnirdesikaRequest(api, action) {
 }
 
 export function* fetchnirdesikaRequest(api, action) {
-  const  nirdeshikaId  = action.payload
+  const nirdeshikaId = action.payload;
 
   const response = yield api.getNirdesika(nirdeshikaId);
-  
+
   if (response.ok) {
-    yield put(
-    PublicationActions.fetchnirdesikaSuccess(response.data)
-    );
+    yield put(PublicationActions.fetchnirdesikaSuccess(response.data));
   } else {
     yield put(PublicationActions.fetchnirdesikaFailure());
   }
