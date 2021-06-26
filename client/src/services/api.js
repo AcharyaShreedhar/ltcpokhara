@@ -73,6 +73,8 @@ const create = (baseURL = Config.API_URL) => {
   const postAdminStaffUpdate = (payload, staffId) =>
     api.put(`staffs/${staffId}`, payload);
 
+  const postAdminStaffDelete = (staffId) => api.delete(`staffs/${staffId}`);
+
   const postAdminNoticeSave = (payload) => api.post("notices", payload);
 
   const postAdminPublicationSave = (payload) =>
@@ -103,6 +105,7 @@ const create = (baseURL = Config.API_URL) => {
     getStaff,
     postAdminStaffSave,
     postAdminStaffUpdate,
+    postAdminStaffDelete,
     postAdminNoticeSave,
     postAdminPublicationSave,
 
