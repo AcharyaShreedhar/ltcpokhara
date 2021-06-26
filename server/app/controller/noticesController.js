@@ -37,7 +37,7 @@ async function getAllNotices(req, res) {
   
   //Controller for adding a Notice
   async function addNotices(req, res) {
-    const addNoticesQuery = `INSERT INTO notices (notice_title, notice_cat, notice_approvedby, notice_publisheddate) values (?,?,?,?)`;
+    const addNoticesQuery = `INSERT INTO notices (notice_title, notice_cat, notice_approvedby, notice_publisheddate, notice_content) values (?,?,?,?,?)`;
     pool.query(
       addNoticesQuery,
       [
@@ -45,7 +45,8 @@ async function getAllNotices(req, res) {
         req.body.notice_title,
         req.body.notice_cat,
         req.body.notice_approvedby,
-        req.body.notice_publisheddate,         
+        req.body.notice_publisheddate,
+        req.body.notice_content,         
       ],
       (error, results, fields) => {
         if (error) {
@@ -58,7 +59,7 @@ async function getAllNotices(req, res) {
   
   //Controller for updating a notice
   async function updateNotices(req, res) {
-    const updateNoticesQuery = `UPDATE notices SET notice_title=?, notice_cat=?, notice_approvedby=?, notice_publisheddate=? WHERE notice_id=?`;
+    const updateNoticesQuery = `UPDATE notices SET notice_title=?, notice_cat=?, notice_approvedby=?, notice_publisheddate=?, notice_content=? WHERE notice_id=?`;
     pool.query(
       updateNoticesQuery,
       [
@@ -67,6 +68,7 @@ async function getAllNotices(req, res) {
         req.body.notice_cat,
         req.body.notice_approvedby,
         req.body.notice_publisheddate,
+        req.body.notice_content,
         req.params.noticeId,
       ],
       (error, results, fields) => {
@@ -100,5 +102,5 @@ async function getAllNotices(req, res) {
     updateNotices,
     deleteNotices,
   };
-  
+   
   
