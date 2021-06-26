@@ -28,7 +28,7 @@ async function getAllPublications(req, res) {
 
 //Controller for Listing a Publication
 async function getPublications(req, res) {
-  const getPublicationsQuery = `select * from assets where publication_id=?`;
+  const getPublicationsQuery = `select * from publications where publication_id=?`;
   pool.query(getPublicationsQuery, [req.params.publicationId], (error, results, fields) => {
     if (error) throw error;
     res.send(JSON.stringify({ status: 200, error: null, data: results }));
@@ -62,7 +62,7 @@ async function addPublications(req, res) {
 async function updatePublications(req, res) {
   const updatePublicationsQuery = `UPDATE publications SET publications_title=?, publication_subject=?, publication_cat=?, publication_date=?, publication_file=? WHERE publication_id=?`;
   pool.query(
-    updateAssetsQuery,
+    updatePublicationsQuery,
     [
       req.body.publications_title,
       req.body.publication_subject,
@@ -82,7 +82,7 @@ async function updatePublications(req, res) {
 
 //Controller for deleting a Publication
 async function deletePublications(req, res) {
-  const deletePublicationsQuery = `DELETE  FROM assets where publiation_id=?`;
+  const deletePublicationsQuery = `DELETE  FROM publications where publiation_id=?`;
   pool.query(
     deletePublicationsQuery,
     [req.params.publicationId],
