@@ -1,0 +1,39 @@
+.ds-avatar {
+  &:focus {
+    outline: none;
+  }
+  .avatar-image {
+    &:focus {
+      outline: none;
+    }
+    img {
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+.item-name {
+  position: relative;
+  cursor: pointer;
+  &-modal {
+    display: none;
+    padding: 12px;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 999;
+    width: 125px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1),
+      0 2px 15px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  &:hover {
+    .item-name-modal {
+      display: block;
+    }
+  }
+}

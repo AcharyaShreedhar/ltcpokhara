@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { isNil } from "ramda";
+import { isNil,equals } from "ramda";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
-import { Table } from "react-bootstrap";
-import { englishToNepaliNumber } from "nepali-number";
-import ReactPaginate from "react-paginate";
+import { EventsSection } from "../../../components";
 import AdminActions from "../../../actions/admin";
 
 const headings = ["शीर्षक", "रुजुकर्ता", "मिति", ""];
@@ -12,11 +10,12 @@ const headings = ["शीर्षक", "रुजुकर्ता", "मि�
 class Events extends Component {
   constructor(props) {
     super(props);
-    this.state = { perPage: 10, page: 1 };
+    this.state = { loc: "eventslist", perPage: 10, page: 1 };
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    const loc = nextProps.location.pathname.split("/")[2];
     var eventsList = [];
     if (nextProps != prevState) {
       eventsList = nextProps.eventsData.data;
@@ -27,7 +26,7 @@ class Events extends Component {
 
     const data = !isNil(eventsList) ? eventsList.list : [];
 
-    return { data, pageCount };
+    return { data, pageCount,loc };
   }
 
   handlePageChange(data) {
@@ -41,48 +40,55 @@ class Events extends Component {
     });
   }
 
+  handleSelectMenu(event, item) {
+    switch (event) {
+      case "edit": {
+        this.props.history.push({
+          pathname: `/notices/eventsdit/${item.plot_id}`,
+          item,
+        });
+        break;
+      }
+
+      case "delete": {
+        this.props.deleteBanxetraanyaprayojan(item.plot_id);
+        break;
+      }
+      default:
+        break;
+    }
+  }
+
   render() {
-    const { data, pageCount } = this.state;
+    const { data, pageCount,loc } = this.state;
     return (
-      <div className="content">
-        <div className="titlebar">कार्यक्रमहरू</div>
-        <div>
-          <Table responsive striped bordered hover>
-            <thead>
-              <tr>
-                <th>क्र.स.</th>
-                {headings.map((heading, index) => (
-                  <th key={index}>{heading}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((event, index) => (
-                <tr>
-                  <td>{englishToNepaliNumber(index + 1)}</td>
-                  <td key={index}> {event.notice_title}</td>
-                  <td key={index}> {event.notice_approvedby}</td>
-                  <td key={index}> {event.notice_publisheddate}</td>
-                  <td key={index}> {event.notice_file}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-          <div className="paginationStyle">
-            <ReactPaginate
-              previousLabel={"PREV"}
-              nextLabel={"NEXT"}
-              breakLabel={"..."}
-              breakClassName={"break-me"}
-              pageCount={pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={this.handlePageChange}
-              containerClassName={"pagination"}
-              activeClassName={"active"}
-            />
-          </div>
-        </div>
+      <div>
+        {equals(loc, "eventslist") && (
+          <EventsSection.List
+            title="कार्यक्रमहरू सम्बन्धि विवरण"
+            pageCount={pageCount}
+            data={data}
+            headings={headings}
+            onSelect={this.handleSelectMenu}
+            onPageClick={(e) => this.handlePageChange(e)}
+          />
+        )}
+
+        {equals(loc, "eventsdetail") && (
+          <EventsSection.Edit
+            title="कार्यक्रमको बिस्तृत विवरण"
+            history={this.props.history}
+            onSelect={this.handleSelectMenu}
+          />
+        )}
+        {equals(loc, "eventsedit") && (
+          <EventsSection.Edit
+            title="कार्यक्रमहरू पुनः प्रविष्ट"
+            history={this.props.history}
+            onSelect={this.handleSelectMenu}
+            onUpdate={(e, id) => this.props.updateEvents(e, id)}
+          />
+        )}
       </div>
     );
   }
@@ -97,7 +103,7 @@ Events.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  eventsData: state.admin.programmes,
+  eventsData: state.admin.alleventsData,
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchallEvents: (payload) =>

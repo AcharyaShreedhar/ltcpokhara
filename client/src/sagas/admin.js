@@ -4,6 +4,21 @@ import xmljs from "xml-js";
 import { isNil } from "ramda";
 import AdminActions from "../actions/admin";
 
+
+export function* fetchalleventsRequest(api, action) {
+  const { payload } = action;
+  const payloaddata = isNil(payload) ? action : payload;
+  const response = yield api.getEventsList(payloaddata);
+  if (response.ok) {
+    yield put(
+      AdminActions.fetchalleventsSuccess(response.data)
+    );
+  } else {
+    yield put(AdminActions.fetchalleventsFailure());
+  }
+}
+
+
 export function* addstaffRequest(api, action) {
   const { payload, attachment } = action;
 

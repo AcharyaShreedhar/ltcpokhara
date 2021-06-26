@@ -1,3 +1,5 @@
+
+import { equals } from "ramda";
 const addMenuItems = [
   { id: 1, label: "Add Notice", name: "notice", url: "/admin/add_notice" },
   {
@@ -15,4 +17,15 @@ const addMenuItems = [
   },
 ];
 
-export { addMenuItems };
+const AssetsURL = equals(process.env.NODE_ENV, "production")
+  ? "https://www.ltcpokhara.com/assets"
+  : "https://www.ltcpokhara.com/assets";
+
+const SPECIALOPTIONS = {
+  ALL: -1, // Select All
+  NONE: -2, // Select None
+  SELFASSIGNED: -3,
+  LIST: -4, // List
+};
+
+export { AssetsURL,addMenuItems,SPECIALOPTIONS };

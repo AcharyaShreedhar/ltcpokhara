@@ -5,7 +5,12 @@ const { Types, Creators } = createActions({
    *** Please add redux functions which should do API calls here.
    */
 
-  // -----------   Learn Page
+ 
+
+  // fetching all events
+  fetchalleventsRequest: ["payload"],
+  fetchalleventsSuccess: ["response"],
+  fetchalleventsFailure: null,
 
   addstaffRequest: ["payload", "image"],
   addstaffSuccess: ["response"],

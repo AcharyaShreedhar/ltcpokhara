@@ -49,8 +49,11 @@ const create = (baseURL = Config.API_URL) => {
 
   api.addMonitor(naviMonitor);
 
-   // Login API
-   const loginByUsername = (payload) => api.post("users/login", payload);
+  // Login API
+  const loginByUsername = (payload) => api.post("users/login", payload);
+
+  //EVENTS
+  const getEventsList = (payload) => api.post("eventsList", payload);
 
   const postAdminStaffSave = (payload) => api.post("staffs", payload);
 
@@ -66,6 +69,7 @@ const create = (baseURL = Config.API_URL) => {
   return {
     loginByUsername,
 
+    getEventsList,
     postAdminStaffSave,
     postAdminNoticeSave,
     postAdminPublicationSave,

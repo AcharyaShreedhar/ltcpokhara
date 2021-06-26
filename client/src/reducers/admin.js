@@ -7,6 +7,24 @@ const initialState = Immutable({
   status: "",
 });
 
+
+
+//events 
+
+const fetchalleventsRequest = (state, action) =>
+  state.merge({ ...state, status: "pending" });
+const fetchalleventsSuccess = (state, action) => {
+  console.log("reducer", action.response);
+  return state.merge({
+    ...state,
+    status: "done",
+    alleventsData: action.response,
+  });
+};
+const fetchalleventsFailure = (state, action) => {
+  state.merge({ ...state, status: "error" });
+};
+
 // Add Staff
 const addstaffRequest = (state, action) =>
   state.merge({ ...state, status: "pending" });
@@ -85,6 +103,10 @@ const clearRequest = (state, action) =>
   state.merge({ ...state, ...initialState });
 
 export const reducer = createReducer(initialState, {
+
+  [AdminTypes.FETCHALLEVENTS_REQUEST]: fetchalleventsRequest,
+  [AdminTypes.FETCHALLEVENTS_SUCCESS]: fetchalleventsSuccess,
+  [AdminTypes.FETCHALLEVENTS_FAILURE]: fetchalleventsFailure,
   // add Staff
   [AdminTypes.ADDSTAFF_REQUEST]: addstaffRequest,
   [AdminTypes.ADDSTAFF_SUCCESS]: addstaffSuccess,
