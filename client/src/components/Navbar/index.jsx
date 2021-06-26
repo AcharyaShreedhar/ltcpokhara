@@ -72,7 +72,7 @@ class NavbarComponent extends Component {
                 प्रेस विज्ञप्ति
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="/downloads" className="pr-5">
+            <Nav.Link href="/downloadslist" className="pr-5">
               डाउनलोड्
             </Nav.Link>
             <NavDropdown
