@@ -28,6 +28,7 @@ const staffsRoutes = require("./app/routes/staffsRoutes");
 const eventsRoutes = require("./app/routes/eventsRoutes");
 const pressReleaseRoutes = require("./app/routes/pressReleaseRoutes");
 const booksRoutes = require("./app/routes/booksRoutes");
+const downloadsRoutes = require("./app/routes/downloadsRoutes");
 
 
 
@@ -38,6 +39,7 @@ app.use("/api/v1", staffsRoutes);
 app.use("/api/v1", eventsRoutes);
 app.use("/api/v1", pressReleaseRoutes);
 app.use("/api/v1", booksRoutes);
+app.use("/api/v1", downloadsRoutes);
 
 
 const port = process.env.PORT || 3001;
