@@ -21,6 +21,7 @@ import {
   fetchbooksRequest,
   addbooksRequest,
   fetchallnirdesikaRequest,
+  fetchnirdesikaRequest,
 } from "./publication";
 
 const api = API.create();
@@ -48,5 +49,6 @@ export default function* root() {
     takeLatest(PublicationTypes.FETCHBOOKS_REQUEST, fetchbooksRequest, api),
     takeLatest(PublicationTypes.ADDBOOKS_REQUEST, addbooksRequest, api),
     takeLatest(PublicationTypes.FETCHALLNIRDESIKA_REQUEST, fetchallnirdesikaRequest, api),
+    takeLatest(PublicationTypes.FETCHNIRDESIKA_REQUEST, fetchnirdesikaRequest, api),
   ]);
 }
