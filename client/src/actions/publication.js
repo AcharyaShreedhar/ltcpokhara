@@ -21,6 +21,11 @@ addbooksRequest: ["payload"],
 addbooksSuccess: ["response"],
 addbooksFailure: null,
 
+//fetch all  nirdesika
+fetchallnirdesikaRequest: ["payload"],
+fetchallnirdesikaSuccess: ["response"],
+fetchallnirdesikaFailure: null,
+
  // Clearn all caches
  clearRequest: null,
 });
