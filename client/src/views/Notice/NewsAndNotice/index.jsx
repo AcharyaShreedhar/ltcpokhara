@@ -44,14 +44,14 @@ class NewsAndNotice extends Component {
     switch (event) {
       case "edit": {
         this.props.history.push({
-          pathname: `/notices/eventsdit/${item.plot_id}`,
+          pathname: `/notices/newsandnoticesedit/${item.notice_id}`,
           item,
         });
         break;
       }
 
       case "delete": {
-        this.props.deleteBanxetraanyaprayojan(item.plot_id);
+        this.props.deleteBanxetraanyaprayojan(item.notice_id);
         break;
       }
       default:

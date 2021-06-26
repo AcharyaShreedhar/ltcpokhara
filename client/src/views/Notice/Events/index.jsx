@@ -1,17 +1,18 @@
 import React, { Component } from "react";
-import { isNil,equals } from "ramda";
+import { isNil, equals } from "ramda";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { EventsSection } from "../../../components";
 import AdminActions from "../../../actions/admin";
 
-const headings = ["शीर्षक", "रुजुकर्ता", "मिति", ""];
+const headings = ["शीर्षक", "कार्यक्रम बिवरण ", "रुजुकर्ता", "मिति", "फाइल"];
 
 class Events extends Component {
   constructor(props) {
     super(props);
     this.state = { loc: "eventslist", perPage: 10, page: 1 };
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.handleSelectMenu = this.handleSelectMenu.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -26,7 +27,7 @@ class Events extends Component {
 
     const data = !isNil(eventsList) ? eventsList.list : [];
 
-    return { data, pageCount,loc };
+    return { data, pageCount, loc };
   }
 
   handlePageChange(data) {
@@ -42,16 +43,23 @@ class Events extends Component {
 
   handleSelectMenu(event, item) {
     switch (event) {
+      case "detail view": {
+        this.props.history.push({
+          pathname: `/notice/eventsdetail/${item.event_id}`,
+          item,
+        });
+        break;
+      }
       case "edit": {
         this.props.history.push({
-          pathname: `/notices/eventsdit/${item.plot_id}`,
+          pathname: `/notice/eventsedit/${item.event_id}`,
           item,
         });
         break;
       }
 
       case "delete": {
-        this.props.deleteBanxetraanyaprayojan(item.plot_id);
+        this.props.deleteBanxetraanyaprayojan(item.event_id);
         break;
       }
       default:
@@ -60,7 +68,8 @@ class Events extends Component {
   }
 
   render() {
-    const { data, pageCount,loc } = this.state;
+    const { data, pageCount, loc } = this.state;
+
     return (
       <div>
         {equals(loc, "eventslist") && (
@@ -78,14 +87,12 @@ class Events extends Component {
           <EventsSection.Edit
             title="कार्यक्रमको बिस्तृत विवरण"
             history={this.props.history}
-            onSelect={this.handleSelectMenu}
           />
         )}
         {equals(loc, "eventsedit") && (
           <EventsSection.Edit
             title="कार्यक्रमहरू पुनः प्रविष्ट"
             history={this.props.history}
-            onSelect={this.handleSelectMenu}
             onUpdate={(e, id) => this.props.updateEvents(e, id)}
           />
         )}
