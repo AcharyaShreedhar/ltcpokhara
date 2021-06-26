@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { isNil } from "ramda";
+import { isEmpty, equals, isNil } from "ramda";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
-import { Table } from "react-bootstrap";
-import { englishToNepaliNumber } from "nepali-number";
-import ReactPaginate from "react-paginate";
+import { StaffSection } from "../../../components";
 import AdminActions from "../../../actions/admin";
 
 const headings = ["नाम", "पद", "शाखा", "ईमेल", "फोटो"];
@@ -12,81 +10,94 @@ const headings = ["नाम", "पद", "शाखा", "ईमेल", "फो
 class Staff extends Component {
   constructor(props) {
     super(props);
-    this.state = { perPage: 10, page: 1 };
+    this.state = { loc: "staffslist", perPage: 10, page: 1 };
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.handleSelectMenu = this.handleSelectMenu.bind(this);
   }
+
   static getDerivedStateFromProps(nextProps, prevState) {
-    var staffList = [];
+    const loc = nextProps.location.pathname.split("/")[2];
+    var staffsList = [];
     if (nextProps != prevState) {
-      staffList = nextProps.staffsData.data;
+      staffsList = nextProps.staffsData.data;
     }
-    const pageCount = !isNil(staffList)
-      ? Math.ceil(staffList.total / nextProps.perPage)
+    const pageCount = !isNil(staffsList)
+      ? Math.ceil(staffsList.total / nextProps.perPage)
       : 10;
 
-    const data = !isNil(staffList) ? staffList.list : [];
+    const data = !isNil(staffsList) ? staffsList.list : [];
 
-    return { data, pageCount };
+    return { data, pageCount, loc };
   }
 
   handlePageChange(data) {
     const { perPage } = this.state;
     this.setState({ page: data.selected });
 
-    this.props.fetchallNotices({
-      name: "notice_publisheddate",
+    this.props.fetchallStaffs({
+      name: "staff_name",
       page: data.selected * perPage,
       perPage,
     });
   }
+
+  handleSelectMenu(event, item) {
+    switch (event) {
+      case "detail view": {
+        this.props.history.push({
+          pathname: `/about/staffdetail/${item.staff_id}`,
+          item,
+        });
+        break;
+      }
+      case "edit": {
+        this.props.history.push({
+          pathname: `/about/staffedit/${item.staff_id}`,
+          item,
+        });
+        break;
+      }
+
+      case "delete": {
+        this.props.deletestaffs(item.staff_id);
+        break;
+      }
+      default:
+        break;
+    }
+  }
+
   render() {
-    const { data, pageCount } = this.state;
+    const { data, pageCount, loc } = this.state;
+    const { token } = this.props;
 
     return (
-      <div className="content">
-        <div className="titlebar">कर्मचारी</div>
-        <div>
-          <Table responsive striped bordered hover>
-            <thead>
-              <tr>
-                <th>क्र.स.</th>
-                {headings.map((heading, index) => (
-                  <th key={index}>{heading}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {data ? (
-                data.map((staff, index) => (
-                  <tr>
-                    <td>{englishToNepaliNumber(index + 1)}</td>
-                    <td key={index}> {staff.staff_name}</td>
-                    <td key={index}> {staff.staff_designation}</td>
-                    <td key={index}> {staff.staff_branch}</td>
-                    <td key={index}> {staff.staff_email}</td>
-                    <td key={index}> {staff.staff_file}</td>
-                  </tr>
-                ))
-              ) : (
-                <tr>कुनै विवरण उपलब्द छैन !!!</tr>
-              )}
-            </tbody>
-          </Table>
-          <div className="paginationStyle">
-            <ReactPaginate
-              previousLabel={"PREV"}
-              nextLabel={"NEXT"}
-              breakLabel={"..."}
-              breakClassName={"break-me"}
-              pageCount={pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={this.handlePageChange}
-              containerClassName={"pagination"}
-              activeClassName={"active"}
-            />
-          </div>
-        </div>
+      <div>
+        {equals(loc, "stafflist") && (
+          <StaffSection.List
+            title="कार्यक्रमहरू सम्बन्धि विवरण"
+            pageCount={pageCount}
+            data={data}
+            authenticated={!isEmpty(token)}
+            headings={headings}
+            onSelect={this.handleSelectMenu}
+            onPageClick={(e) => this.handlePageChange(e)}
+          />
+        )}
+
+        {equals(loc, "staffsdetail") && (
+          <StaffSection.Detail
+            title="कार्यक्रमको बिस्तृत विवरण"
+            history={this.props.history}
+          />
+        )}
+        {equals(loc, "staffsedit") && !isEmpty(token) && (
+          <StaffSection.Edit
+            title="कार्यक्रमहरू पुनः प्रविष्ट"
+            history={this.props.history}
+            onUpdate={(e, id) => this.props.updatestaffs(e, id)}
+          />
+        )}
       </div>
     );
   }
@@ -101,12 +112,18 @@ Staff.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  staffsData: state.admin.staffs,
+  token: state.app.token,
+  staffsData: state.admin.allstaffData,
 });
-
 const mapDispatchToProps = (dispatch) => ({
-  fetchallNotices: (payload) =>
-    dispatch(AdminActions.fetchallnoticesRequest(payload)),
+  fetchallStaffs: (payload) =>
+    dispatch(AdminActions.fetchallstaffRequest(payload)),
+
+  updatestaffs: (payload, staffId) =>
+    dispatch(AdminActions.updatestaffsRequest(payload, staffId)),
+
+  deletestaffs: (staffId) =>
+    dispatch(AdminActions.deletestaffsRequest(staffId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Staff);

@@ -55,7 +55,7 @@ class NavbarComponent extends Component {
                 उदेश्य
               </NavDropdown.Item>
               <NavDropdown.Item href="/about/tor">TOR</NavDropdown.Item>
-              <NavDropdown.Item href="/about/staff">कर्मचारी</NavDropdown.Item>
+              <NavDropdown.Item href="/about/stafflist">कर्मचारी</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown
               title="सुचना पाटी"

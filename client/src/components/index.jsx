@@ -23,6 +23,7 @@ import * as PressreleaseSection from "./PressreleaseSection";
 import * as BooksSection from "./BooksSection";
 import * as NirdesikaSection from "./NirdesikaSection";
 import * as DownloadsSection from "./DownloadsSection"
+import * as StaffSection from "./StaffSection"
 
 export {
   HeaderComponent,
@@ -50,4 +51,5 @@ export {
   BooksSection,
   NirdesikaSection,
   DownloadsSection
+  StaffSection
 };

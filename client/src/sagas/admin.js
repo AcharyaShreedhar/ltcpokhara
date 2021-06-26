@@ -2,18 +2,15 @@ import xmljs from "xml-js";
 import { toast } from "react-toastify";
 import { isNil } from "ramda";
 import AdminActions from "../actions/admin";
-import { call,put} from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 import { history } from "../reducers";
-
 
 export function* fetchalleventsRequest(api, action) {
   const { payload } = action;
   const payloaddata = isNil(payload) ? action : payload;
   const response = yield api.getEventsList(payloaddata);
   if (response.ok) {
-    yield put(
-      AdminActions.fetchalleventsSuccess(response.data)
-    );
+    yield put(AdminActions.fetchalleventsSuccess(response.data));
   } else {
     yield put(AdminActions.fetchalleventsFailure());
   }
@@ -24,9 +21,7 @@ export function* fetcheventsRequest(api, action) {
 
   const response = yield api.getEvents(eventId);
   if (response.ok) {
-    yield put(
-      AdminActions.fetcheventsSuccess(response.data)
-    );
+    yield put(AdminActions.fetcheventsSuccess(response.data));
   } else {
     yield put(AdminActions.fetcheventsFailure());
   }
@@ -77,7 +72,6 @@ export function* addeventsRequest(api, action) {
   }
 }
 
-
 //update events
 
 export function* updateeventsRequest(api, action) {
@@ -92,15 +86,13 @@ export function* updateeventsRequest(api, action) {
     toast.success("सफलतापुर्वक कार्यक्रम पुनः प्रविष्ट भयो !!!!!", {
       position: toast.POSITION.TOP_CENTER,
     });
-    yield fetchalleventsRequest(api,{
+    yield fetchalleventsRequest(api, {
       name: "events_title",
       page: 0,
       perPage: 10,
     });
     yield call(history.push, "/suchana/eventslist");
-    yield put(
-      AdminActions.updateeventsSuccess(response.data)
-    );
+    yield put(AdminActions.updateeventsSuccess(response.data));
   } else {
     yield put(AdminActions.updateeventsFailure());
     toast.error(
@@ -112,7 +104,6 @@ export function* updateeventsRequest(api, action) {
   }
 }
 
-
 // Delete Events
 export function* deleteeventsRequest(api, action) {
   const { payload } = action;
@@ -123,14 +114,12 @@ export function* deleteeventsRequest(api, action) {
     toast.success("सफलतापुर्वक कार्यक्रम हटाईयो !!!!!", {
       position: toast.POSITION.TOP_CENTER,
     });
-    yield fetchalleventsRequest(api,{
+    yield fetchalleventsRequest(api, {
       name: "event_title",
       page: 0,
       perPage: 10,
     });
-    yield put(
-      AdminActions.deleteeventsSuccess(response.data)
-    );
+    yield put(AdminActions.deleteeventsSuccess(response.data));
   } else {
     yield put(AdminActions.deleteeventsFailure());
     toast.error(
@@ -142,29 +131,24 @@ export function* deleteeventsRequest(api, action) {
   }
 }
 
-
 export function* fetchallstaffRequest(api, action) {
   const { payload } = action;
   const payloaddata = isNil(payload) ? action : payload;
   const response = yield api.getStaffList(payloaddata);
+
   if (response.ok) {
-    yield put(
-      AdminActions.fetchallstaffSuccess(response.data)
-    );
+    yield put(AdminActions.fetchallstaffSuccess(response.data));
   } else {
     yield put(AdminActions.fetchallstaffFailure());
   }
 }
-
 
 export function* fetchstaffRequest(api, action) {
   const staffId = action.payload;
 
   const response = yield api.getEvents(staffId);
   if (response.ok) {
-    yield put(
-      AdminActions.fetchstaffSuccess(response.data)
-    );
+    yield put(AdminActions.fetchstaffSuccess(response.data));
   } else {
     yield put(AdminActions.fetchstaffFailure());
   }
@@ -359,5 +343,3 @@ export function* fetchpublicationRequest(api, action) {
     yield put(AdminActions.fetchpublicationFailure());
   }
 }
-
-

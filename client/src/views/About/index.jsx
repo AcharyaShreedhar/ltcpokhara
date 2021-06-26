@@ -4,8 +4,16 @@ import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { NotFound } from "../../components";
 import aboutRoutes from "../../routes/about";
+import AdminActions from "../../actions/admin";
 
 class About extends Component {
+  componentDidMount() {
+    this.props.fetchallStaffs({
+      name: "staff_name",
+      page: 0,
+      perPage: 10,
+    });
+  }
   render() {
     return (
       <Switch>
@@ -36,6 +44,9 @@ About.defaultProps = {
   history: () => {},
 };
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  fetchallStaffs: (payload) =>
+    dispatch(AdminActions.fetchallstaffRequest(payload)),
+});
 
 export default connect(null, mapDispatchToProps)(About);
