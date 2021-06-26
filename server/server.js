@@ -26,7 +26,7 @@ const noticesRoutes = require("./app/routes/noticesRoutes")
 const publicationsRoutes = require("./app/routes/publicationsRoutes");
 const staffsRoutes = require("./app/routes/staffsRoutes");
 const eventsRoutes = require("./app/routes/eventsRoutes");
-
+const pressReleaseRoutes = require("./app/routes/pressReleaseRoutes");
 
 
 app.use("/api/v1", publicationsRoutes);
@@ -34,6 +34,7 @@ app.use("/api/v1", usersRoutes);
 app.use("/api/v1", noticesRoutes);
 app.use("/api/v1", staffsRoutes);
 app.use("/api/v1", eventsRoutes);
+app.use("/api/v1", pressReleaseRoutes);
 
 
 const port = process.env.PORT || 3001;
