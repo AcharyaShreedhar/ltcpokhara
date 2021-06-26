@@ -67,6 +67,32 @@ state.merge({
 const deleteeventsFailure = (state, action) =>
 state.merge({ ...state, status: "error" });
 
+//fetchall staffs
+const fetchallstaffRequest = (state, action) =>
+  state.merge({ ...state, status: "pending" });
+const fetchallstaffSuccess = (state, action) => {
+  return state.merge({
+    ...state,
+    status: "done",
+    allstaffData: action.response,
+  });
+};
+const fetchallstaffFailure = (state, action) => {
+  state.merge({ ...state, status: "error" });
+};
+
+// Fetch Staffs
+const fetchstaffRequest = (state, action) =>
+  state.merge({ ...state, status: "pending" });
+const fetchstaffSuccess = (state, action) =>
+  state.merge({
+    ...state,
+    status: "done",
+    staffdata: action.response,
+  });
+const fetchstaffFailure = (state, action) =>
+  state.merge({ ...state, status: "error" });
+
 
 // Add Staff
 const addstaffRequest = (state, action) =>
@@ -116,17 +142,6 @@ const fetchnoticeSuccess = (state, action) =>
 const fetchnoticeFailure = (state, action) =>
   state.merge({ ...state, status: "error" });
 
-// Fetch Staffs
-const fetchstaffRequest = (state, action) =>
-  state.merge({ ...state, status: "pending" });
-const fetchstaffSuccess = (state, action) =>
-  state.merge({
-    ...state,
-    status: "done",
-    staffs: action.response,
-  });
-const fetchstaffFailure = (state, action) =>
-  state.merge({ ...state, status: "error" });
 
 // Fetch Publications
 const fetchpublicationRequest = (state, action) =>
@@ -166,7 +181,14 @@ export const reducer = createReducer(initialState, {
   [AdminTypes.DELETEEVENTS_SUCCESS]: deleteeventsSuccess,
   [AdminTypes.DELETEEVENTS_FAILURE]: deleteeventsFailure,
 
-  // add Staff
+  [AdminTypes.FETCHALLSTAFF_REQUEST]: fetchallstaffRequest,
+  [AdminTypes.FETCHALLSTAFF_SUCCESS]: fetchallstaffSuccess,
+  [AdminTypes.FETCHALLSTAFF_FAILURE]: fetchallstaffFailure,
+
+  [AdminTypes.FETCHSTAFF_REQUEST]: fetchstaffRequest,
+  [AdminTypes.FETCHSTAFF_SUCCESS]: fetchstaffSuccess,
+  [AdminTypes.FETCHSTAFF_FAILURE]: fetchstaffFailure,
+
   [AdminTypes.ADDSTAFF_REQUEST]: addstaffRequest,
   [AdminTypes.ADDSTAFF_SUCCESS]: addstaffSuccess,
   [AdminTypes.ADDSTAFF_FAILURE]: addstaffFailure,
@@ -182,10 +204,6 @@ export const reducer = createReducer(initialState, {
   [AdminTypes.FETCHNOTICE_REQUEST]: fetchnoticeRequest,
   [AdminTypes.FETCHNOTICE_SUCCESS]: fetchnoticeSuccess,
   [AdminTypes.FETCHNOTICE_FAILURE]: fetchnoticeFailure,
-
-  [AdminTypes.FETCHSTAFF_REQUEST]: fetchstaffRequest,
-  [AdminTypes.FETCHSTAFF_SUCCESS]: fetchstaffSuccess,
-  [AdminTypes.FETCHSTAFF_FAILURE]: fetchstaffFailure,
 
   [AdminTypes.FETCHPUBLICATION_REQUEST]: fetchpublicationRequest,
   [AdminTypes.FETCHPUBLICATION_SUCCESS]: fetchpublicationSuccess,

@@ -143,6 +143,33 @@ export function* deleteeventsRequest(api, action) {
 }
 
 
+export function* fetchallstaffRequest(api, action) {
+  const { payload } = action;
+  const payloaddata = isNil(payload) ? action : payload;
+  const response = yield api.getStaffList(payloaddata);
+  if (response.ok) {
+    yield put(
+      AdminActions.fetchallstaffSuccess(response.data)
+    );
+  } else {
+    yield put(AdminActions.fetchallstaffFailure());
+  }
+}
+
+
+export function* fetchstaffRequest(api, action) {
+  const staffId = action.payload;
+
+  const response = yield api.getEvents(staffId);
+  if (response.ok) {
+    yield put(
+      AdminActions.fetchstaffSuccess(response.data)
+    );
+  } else {
+    yield put(AdminActions.fetchstaffFailure());
+  }
+}
+
 export function* addstaffRequest(api, action) {
   const { payload, attachment } = action;
 
@@ -296,11 +323,4 @@ export function* fetchpublicationRequest(api, action) {
   }
 }
 
-export function* fetchstaffRequest(api, action) {
-  const response = yield api.getAdminStaff();
-  if (response.ok) {
-    yield put(AdminActions.fetchstaffSuccess(response.data));
-  } else {
-    yield put(AdminActions.fetchstaffFailure());
-  }
-}
+

@@ -32,6 +32,14 @@ const { Types, Creators } = createActions({
   addstaffSuccess: ["response"],
   addstaffFailure: null,
 
+  fetchallstaffRequest: ["payload"],
+  fetchallstaffSuccess: ["response"],
+  fetchallstaffFailure: null,
+
+  fetchstaffRequest: null,
+  fetchstaffSuccess: ['response'],
+  fetchstaffFailure: null,
+
   addnoticeRequest: ["payload", "image"],
   addnoticeSuccess: ["response"],
   addnoticeFailure: null,
@@ -39,10 +47,6 @@ const { Types, Creators } = createActions({
   addpublicationRequest: ["payload", "image"],
   addpublicationSuccess: ["response"],
   addpublicationFailure: null,
-
-  fetchstaffRequest: null,
-  fetchstaffSuccess: ['response'],
-  fetchstaffFailure: null,
 
   fetchnoticeRequest: null,
   fetchnoticeSuccess: ['response'],
