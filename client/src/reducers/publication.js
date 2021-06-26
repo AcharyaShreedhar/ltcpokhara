@@ -20,6 +20,21 @@ const fetchallbooksSuccess = (state, action) => {
 const fetchallbooksFailure = (state, action) => {
   state.merge({ ...state, status: "error" });
 };
+//fetch a book
+const fetchbooksRequest = (state, action) =>
+  state.merge({ ...state, token: "", status: "pending" });
+const fetchbooksSuccess = (state, action) => {
+  return state.merge({
+    ...state,
+    status: "done",
+    booksData: action.response,
+  });
+};
+const fetchbooksFailure = (state, action) => {
+  state.merge({ ...state, status: "error" });
+};
+
+
 
 const clearRequest = (state, action) =>
   state.merge({ ...state, ...initialState });
@@ -30,6 +45,10 @@ export const reducer = createReducer(initialState, {
 [PublicationTypes.FETCHALLBOOKS_REQUEST]: fetchallbooksRequest,
 [PublicationTypes.FETCHALLBOOKS_SUCCESS]: fetchallbooksSuccess,
 [PublicationTypes.FETCHALLBOOKS_FAILURE]: fetchallbooksFailure,
+//fetch a book
+[PublicationTypes.FETCHBOOKS_REQUEST]: fetchbooksRequest,
+[PublicationTypes.FETCHBOOKS_SUCCESS]: fetchbooksSuccess,
+[PublicationTypes.FETCHBOOKS_FAILURE]: fetchbooksFailure,
 
 [PublicationTypes.CLEAR_REQUEST]: clearRequest,
 });

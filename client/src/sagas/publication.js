@@ -16,3 +16,17 @@ export function* fetchallbooksRequest(api, action) {
     yield put(PublicationActions.fetchallbooksFailure());
   }
 }
+
+export function* fetchbooksRequest(api, action) {
+  const  bookId  = action.payload
+
+  const response = yield api.getBooks(bookId);
+  
+  if (response.ok) {
+    yield put(
+    PublicationActions.fetchbooksSuccess(response.data)
+    );
+  } else {
+    yield put(PublicationActions.fetchbooksFailure());
+  }
+}

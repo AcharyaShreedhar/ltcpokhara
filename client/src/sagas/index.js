@@ -17,6 +17,7 @@ import {
 } from "./admin";
 import {
   fetchallbooksRequest,
+  fetchbooksRequest,
 } from "./publication";
 
 const api = API.create();
@@ -40,5 +41,6 @@ export default function* root() {
     ),
     takeLatest(AdminTypes.FETCHSTAFF_REQUEST, fetchstaffRequest, api),
     takeLatest(PublicationTypes.FETCHALLBOOKS_REQUEST, fetchallbooksRequest, api),
+    takeLatest(PublicationTypes.FETCHBOOKS_REQUEST, fetchbooksRequest, api),
   ]);
 }
