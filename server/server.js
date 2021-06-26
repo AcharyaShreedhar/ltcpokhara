@@ -23,7 +23,10 @@ app.use(cors());
 
 const usersRoutes = require("./app/routes/usersRoutes");
 const noticesRoutes = require("./app/routes/noticesRoutes")
+const publicationsRoutes = require("./app/routes/publicationsRoutes");
 
+
+app.use("/api/v1", publicationsRoutes);
 app.use("/api/v1", usersRoutes);
 app.use("/api/v1", noticesRoutes);
 
