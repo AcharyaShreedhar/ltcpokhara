@@ -19,6 +19,7 @@ const reducers = combineReducers({
   app: require("./app").reducer,
   admin: require("./admin").reducer,
   publication: require("./publication").reducer,
+  download: require("./download").reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
