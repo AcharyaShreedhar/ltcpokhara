@@ -35,6 +35,17 @@ const fetchpressreleaseFailure = (state, action) => {
 state.merge({ ...state, status: "error" });
 };
 
+//Add pressrelease
+const addpressreleaseRequest = (state, action) =>
+  state.merge({ ...state, status: "pending" });
+const addpressreleaseSuccess = (state, action) =>
+  state.merge({
+    ...state,
+    status: "done",
+  });
+const addpressreleaseFailure = (state, action) =>
+  state.merge({ ...state, status: "error" });
+
 const clearRequest = (state, action) =>
 state.merge({ ...state, ...initialState });
 
@@ -49,6 +60,11 @@ export const reducer = createReducer(initialState, {
 [PressReleaseTypes.FETCHPRESSRELEASE_REQUEST]: fetchpressreleaseRequest,
 [PressReleaseTypes.FETCHPRESSRELEASE_SUCCESS]: fetchpressreleaseSuccess,
 [PressReleaseTypes.FETCHPRESSRELEASE_FAILURE]: fetchpressreleaseFailure,
+
+//add press release
+[PressReleaseTypes.ADDPRESSRELEASE_REQUEST]: addpressreleaseRequest,
+[PressReleaseTypes.ADDPRESSRELEASE_SUCCESS]: addpressreleaseSuccess,
+[PressReleaseTypes.ADDPRESSRELEASE_FAILURE]: addpressreleaseFailure,
 
 [PressReleaseTypes.CLEAR_REQUEST]: clearRequest,
 });
