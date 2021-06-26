@@ -62,10 +62,10 @@ class NavbarComponent extends Component {
               id="collasible-nav-dropdown"
               className="pr-5"
             >
-              <NavDropdown.Item href="/notice/newsandnotices">
+              <NavDropdown.Item href="/notice/newsandnoticeslist">
                 सूचना तथा समाचारहरू
               </NavDropdown.Item>
-              <NavDropdown.Item href="/notice/events">
+              <NavDropdown.Item href="/notice/eventslist">
                 कार्यक्रमहरू
               </NavDropdown.Item>
               <NavDropdown.Item href="/notice/pressrelease">

@@ -4,7 +4,7 @@ import PressRelease from "../views/Notice/PressRelease";
 
 const noticeRoutes = [
   {
-    path: "/notice/newsandnotices",
+    path: "/notice/newsandnoticeslist",
     title: "NewsAndNotice",
     name: "newsandnotice",
     component: NewsAndNotice,
@@ -16,7 +16,19 @@ const noticeRoutes = [
     component: PressRelease,
   },
   {
-    path: "/notice/events",
+    path: "/notice/eventslist",
+    title: "Events",
+    name: "events",
+    component: Events,
+  },
+  {
+    path: "/notice/eventsedit:id",
+    title: "Events",
+    name: "events",
+    component: Events,
+  },
+  {
+    path: "/notice/eventsdetail:id",
     title: "Events",
     name: "events",
     component: Events,
@@ -24,7 +36,7 @@ const noticeRoutes = [
   {
     redirect: true,
     path: "/notice",
-    to: "/notice/newsandnotices",
+    to: "/notice/newsandnoticeslist",
     name: "notice",
     component: NewsAndNotice,
   },
