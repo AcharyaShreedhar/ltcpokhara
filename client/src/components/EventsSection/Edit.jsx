@@ -8,18 +8,17 @@ import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { NepaliDatePicker } from "nepali-datepicker-reactjs";
 import { Button, Input } from "../../components";
 
-
 class Edit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: props.history.location.item.notice_id,
-      notice_title: props.history.location.item.notice_title,
-      notice_cat: props.history.location.item.notice_cat,
-      notice_content: props.history.location.item.notice_content,
-      notice_publisheddate: props.history.location.item.notice_publisheddate,
-      notice_approvedby: props.history.location.item.notice_approvedby,
-      notice_file: props.history.location.item.notice_file,
+      id: props.history.location.item.event_id,
+      event_title: props.history.location.item.event_title,
+      event_cat: props.history.location.item.event_cat,
+      event_content: props.history.location.item.event_content,
+      event_date: props.history.location.item.event_date,
+      event_approvedby: props.history.location.item.event_approvedby,
+      event_file: props.history.location.item.event_file,
       attachment: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,23 +29,23 @@ class Edit extends Component {
 
   handleSubmit() {
     const {
-      notice_title,
-      notice_cat,
-      notice_content,
-      notice_publisheddate,
-      notice_approvedby,
-      notice_file,
+      event_title,
+      event_cat,
+      event_content,
+      event_date,
+      event_approvedby,
+      event_file,
       attachment,
     } = this.state;
     const payload = {
-      notice: {
+      event: {
         data: {
-          notice_title: notice_title,
-          notice_cat: notice_cat,
-          notice_content: notice_content,
-          notice_publisheddate: notice_publisheddate,
-          notice_approvedby: notice_approvedby,
-          notice_file: attachment.name || notice_file,
+          event_title: event_title,
+          event_cat: event_cat,
+          event_content: event_content,
+          event_date: event_date,
+          event_approvedby: event_approvedby,
+          event_file: attachment.name || event_file,
         },
       },
     };
@@ -58,7 +57,7 @@ class Edit extends Component {
   }
 
   handleDate(e) {
-    this.setState({ notice_publishedDate: e });
+    this.setState({ event_date: e });
   }
   handleDrop(e) {
     this.setState({ attachment: e[0] });
@@ -67,12 +66,12 @@ class Edit extends Component {
   render() {
     const { isBusy } = this.props;
     const {
-      notice_title,
-      notice_content,
-      notice_cat,
-      notice_publisheddate,
-      notice_approvedby,
-      notice_file,
+      event_title,
+      event_content,
+      event_cat,
+      event_date,
+      event_approvedby,
+      event_file,
       attachment,
     } = this.state;
     return (
@@ -84,27 +83,27 @@ class Edit extends Component {
           <Input
             className="mb-4"
             title="शीर्षक "
-            value={notice_title}
+            value={event_title}
             direction="vertical"
-            onChange={(e) => this.setState({ notice_title: e })}
+            onChange={(e) => this.setState({ event_title: e })}
           />
           <Input
             className="mb-4"
             title="बेहोरा"
-            value={notice_content}
+            value={event_content}
             direction="vertical"
             as="textarea"
-            onChange={(e) => this.setState({ notice_content: e })}
+            onChange={(e) => this.setState({ event_content: e })}
           />
           <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label className="core-input-label">वर्ग</Form.Label>
             <Form.Control
               className="input"
               as="select"
-              value={notice_cat}
+              value={event_cat}
               onChange={this.handleCategory}
             >
-              <option value="newsnotice">सूचना तथा समाचारहरू</option>
+              <option value="newsevent">सूचना तथा समाचारहरू</option>
               <option value="programme">कार्यक्रमहरू</option>
               <option value="pressrelease">प्रेस विज्ञप्ति</option>
             </Form.Control>
@@ -112,15 +111,15 @@ class Edit extends Component {
           <Input
             className="mb-4"
             title="शीर्षक "
-            value={notice_approvedby}
+            value={event_approvedby}
             direction="vertical"
-            onChange={(e) => this.setState({ notice_approvedby: e })}
+            onChange={(e) => this.setState({ event_approvedby: e })}
           />
           <span className="dsl-b18">प्रकाशित मिति</span>
           <NepaliDatePicker
             inputClassName="form-control"
             className="mb-4"
-            value={notice_publisheddate}
+            value={event_date}
             onChange={(e) => this.handleDate(e)}
             options={{ calenderLocale: "ne", valueLocale: "en" }}
           />
@@ -139,7 +138,7 @@ class Edit extends Component {
                   <input {...getInputProps()} />
                   <div className="image">
                     <FontAwesomeIcon icon={faUpload} className="pr-1" />
-                    Upload:{attachment ? attachment.name || notice_file : ""}
+                    Upload:{attachment ? attachment.name || event_file : ""}
                   </div>
                 </div>
               </section>
@@ -160,18 +159,18 @@ class Edit extends Component {
 }
 
 Edit.propTypes = {
-  notice_title: PropTypes.string,
-  notice_approvedby: PropTypes.string,
-  notice_publisheddate: PropTypes.string,
-  notice_cat: PropTypes.string,
+  event_title: PropTypes.string,
+  event_approvedby: PropTypes.string,
+  event_date: PropTypes.string,
+  event_cat: PropTypes.string,
   onSubmit: PropTypes.func,
 };
 
 Edit.defaultProps = {
-  notice_title: "",
-  notice_cat: "",
-  notice_publisheddate: "",
-  notice_approvedby: "",
+  event_title: "",
+  event_cat: "",
+  event_date: "",
+  event_approvedby: "",
 
   OnSubmit: () => {},
 };

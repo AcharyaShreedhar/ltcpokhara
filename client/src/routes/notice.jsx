@@ -22,13 +22,13 @@ const noticeRoutes = [
     component: Events,
   },
   {
-    path: "/notice/eventsedit:id",
+    path: "/notice/eventsedit/:id",
     title: "Events",
     name: "events",
     component: Events,
   },
   {
-    path: "/notice/eventsdetail:id",
+    path: "/notice/eventsdetail/:id",
     title: "Events",
     name: "events",
     component: Events,

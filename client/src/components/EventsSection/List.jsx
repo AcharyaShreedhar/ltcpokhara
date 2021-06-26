@@ -18,20 +18,22 @@ function List(props) {
             {headings.map((heading, index) => (
               <th key={index}>{heading}</th>
             ))}
+            <th />
           </tr>
         </thead>
         <tbody>
           {data.map((event, index) => (
             <tr>
               <td>{englishToNepaliNumber(index + 1)}</td>
-              <td key={index}> {event.notice_title}</td>
-              <td key={index}> {event.notice_approvedby}</td>
-              <td key={index}> {event.notice_publisheddate}</td>
-              <td key={index}> {event.notice_file}</td>
+              <td key={index}> {event.event_title}</td>
+              <td key={index}> {event.event_content}</td>
+              <td key={index}> {event.event_approved_by}</td>
+              <td key={index}> {event.event_date}</td>
+              <td key={index}> {event.event_file}</td>
               <td>
                 <div className="edit">
                   <EditDropdown
-                    options={["Edit", "Delete"]}
+                    options={["Detail View", "Edit", "Delete"]}
                     onChange={(e) => onSelect(e, event)}
                   />
                 </div>

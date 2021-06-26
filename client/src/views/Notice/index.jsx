@@ -4,8 +4,16 @@ import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { NotFound } from "../../components";
 import NoticeRoutes from "../../routes/notice";
+import AdminActions from "../../actions/admin";
 
 class Notice extends Component {
+  componentDidMount() {
+    this.props.fetchallEvents({
+      name: "event_date",
+      page: 0,
+      perPage: 10,
+    });
+  }
   render() {
     return (
       <Switch>
@@ -38,6 +46,9 @@ Notice.defaultProps = {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  fetchallEvents: (payload) =>
+    dispatch(AdminActions.fetchalleventsRequest(payload)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Notice);

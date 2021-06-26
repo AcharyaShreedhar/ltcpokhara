@@ -7,14 +7,11 @@ const initialState = Immutable({
   status: "",
 });
 
-
-
-//events 
+//events
 
 const fetchalleventsRequest = (state, action) =>
   state.merge({ ...state, status: "pending" });
 const fetchalleventsSuccess = (state, action) => {
-  console.log("reducer", action.response);
   return state.merge({
     ...state,
     status: "done",
@@ -103,7 +100,6 @@ const clearRequest = (state, action) =>
   state.merge({ ...state, ...initialState });
 
 export const reducer = createReducer(initialState, {
-
   [AdminTypes.FETCHALLEVENTS_REQUEST]: fetchalleventsRequest,
   [AdminTypes.FETCHALLEVENTS_SUCCESS]: fetchalleventsSuccess,
   [AdminTypes.FETCHALLEVENTS_FAILURE]: fetchalleventsFailure,
