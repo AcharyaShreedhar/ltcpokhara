@@ -58,6 +58,8 @@ const create = (baseURL = Config.API_URL) => {
   const getEvents = (eventId) =>
     api.get(`events/${eventId}`);
 
+  const postAdminEventsSave = (payload) => api.post("events", payload);
+
   const postAdminStaffSave = (payload) => api.post("staffs", payload);
 
   const postAdminNoticeSave = (payload) => api.post("notices", payload);
@@ -74,6 +76,7 @@ const create = (baseURL = Config.API_URL) => {
 
     getEventsList,
     getEvents,
+    postAdminEventsSave,
     postAdminStaffSave,
     postAdminNoticeSave,
     postAdminPublicationSave,
