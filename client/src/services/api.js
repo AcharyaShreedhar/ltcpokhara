@@ -65,6 +65,10 @@ const create = (baseURL = Config.API_URL) => {
   const getAdminNotice = () => api.get("notices");
   const getAdminPublication = () => api.get("publications");
   const getAdminStaff = () => api.get("staffs");
+  const getBooksList = (payload) => api.post("booksList", payload);
+  const getBooks = (bookId) =>api.get(`books/${bookId}`);
+  const postPublicationBooksSave = (payload) =>api.post("books", payload);
+
 
   return {
     loginByUsername,
@@ -77,6 +81,9 @@ const create = (baseURL = Config.API_URL) => {
     getAdminNotice,
     getAdminPublication,
     getAdminStaff,
+    getBooksList,
+    getBooks,
+    postPublicationBooksSave,
   };
 };
 
