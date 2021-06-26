@@ -3,6 +3,7 @@ import API from "../services/api";
 import { AppTypes } from "../actions/app";
 import { AdminTypes } from "../actions/admin";
 import { PublicationTypes} from "../actions/publication";
+import { DownloadTypes} from "../actions/download";
 
 import { loginRequest, logoutRequest } from "./app";
 import {
@@ -23,6 +24,9 @@ import {
   fetchallnirdesikaRequest,
   fetchnirdesikaRequest,
 } from "./publication";
+import {
+  fetchalldownloadsRequest,
+} from "./download";
 
 const api = API.create();
 
@@ -50,5 +54,6 @@ export default function* root() {
     takeLatest(PublicationTypes.ADDBOOKS_REQUEST, addbooksRequest, api),
     takeLatest(PublicationTypes.FETCHALLNIRDESIKA_REQUEST, fetchallnirdesikaRequest, api),
     takeLatest(PublicationTypes.FETCHNIRDESIKA_REQUEST, fetchnirdesikaRequest, api),
+    takeLatest(DownloadTypes.FETCHALLDOWNLOADS_REQUEST, fetchalldownloadsRequest, api),
   ]);
 }
