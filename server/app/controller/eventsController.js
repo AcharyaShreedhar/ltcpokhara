@@ -37,7 +37,7 @@ async function getAllEvents(req, res) {
   
   //Controller for adding a Event
   async function addEvents(req, res) {
-    const addEventsQuery = `INSERT INTO events (event_title, approved_by, event_date, event_file) values (?,?,?,?,?)`;
+    const addEventsQuery = `INSERT INTO events (event_title, approved_by, event_date, event_content, event_file) values (?,?,?,?,?)`;
     pool.query(
       addEventsQuery,
       [
