@@ -4,8 +4,16 @@ import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { NotFound } from "../../components";
 import PublicationsRoutes from "../../routes/publications";
+import PublicationActions from "../../actions/publication";
 
 class Publications extends Component {
+  componentDidMount() {
+    this.props.fetchallBooks({
+      name: "published_date",
+      page: 0,
+      perPage: 10,
+    });
+  }
   render() {
     return (
       <Switch>
@@ -38,6 +46,9 @@ Publications.defaultProps = {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  fetchallBooks: (payload) =>
+    dispatch(PublicationActions.fetchallbooksRequest(payload)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Publications);

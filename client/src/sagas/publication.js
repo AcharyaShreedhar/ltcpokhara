@@ -10,7 +10,7 @@ export function* fetchallbooksRequest(api, action) {
   const { payload } = action;
   const payloaddata = isNil(payload) ? action : payload;
   const response = yield api.getBooksList(payloaddata);
-
+console.log('resp',response)
   if (response.ok) {
     yield put(PublicationActions.fetchallbooksSuccess(response.data));
   } else {
