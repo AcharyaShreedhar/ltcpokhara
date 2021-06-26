@@ -10,12 +10,6 @@ const publicationsRoutes = [
     component: Procedures,
   },
   {
-    path: "/publications/downloads",
-    title: "Downloads",
-    name: "downloads",
-    component: Downloads,
-  },
-  {
     path: "/publications/books",
     title: "Books",
     name: "books",

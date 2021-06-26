@@ -59,7 +59,7 @@ class Events extends Component {
       }
 
       case "delete": {
-        this.props.deleteBanxetraanyaprayojan(item.event_id);
+        this.props.deleteEvents(item.event_id);
         break;
       }
       default:
@@ -84,7 +84,7 @@ class Events extends Component {
         )}
 
         {equals(loc, "eventsdetail") && (
-          <EventsSection.Edit
+          <EventsSection.Detail
             title="कार्यक्रमको बिस्तृत विवरण"
             history={this.props.history}
           />
@@ -115,6 +115,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchallEvents: (payload) =>
     dispatch(AdminActions.fetchalleventsRequest(payload)),
+
+  updateEvents: (payload, eventId) =>
+    dispatch(AdminActions.updateeventsRequest(payload, eventId)),
+
+  deleteEvents: (eventId) =>
+    dispatch(AdminActions.deleteeventsRequest(eventId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Events);
