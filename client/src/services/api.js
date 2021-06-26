@@ -64,7 +64,7 @@ const create = (baseURL = Config.API_URL) => {
 
   const postAdminEventsDelete = (eventId) => api.delete(`events/${eventId}`);
 
-  const getStaffList = (payload) => api.post("staffs", payload);
+  const getStaffList = (payload) => api.post("staffList", payload);
 
   const getStaff = (staffId) => api.get(`staffs/${staffId}`);
 

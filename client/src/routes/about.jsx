@@ -30,7 +30,19 @@ const aboutRoutes = [
     component: Tor,
   },
   {
-    path: "/about/staff",
+    path: "/about/stafflist",
+    title: "Staff",
+    name: "staff",
+    component: Staff,
+  },
+  {
+    path: "/about/staffedit/:id",
+    title: "Staff",
+    name: "staff",
+    component: Staff,
+  },
+  {
+    path: "/about/staffdetail/:id",
     title: "Staff",
     name: "staff",
     component: Staff,
