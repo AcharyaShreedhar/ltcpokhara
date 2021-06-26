@@ -215,6 +215,43 @@ export function* addstaffRequest(api, action) {
   }
 }
 
+
+//update staff
+
+export function* updatestaffRequest(api, action) {
+  const { payload, staffId } = action;
+
+  const response = yield api.postAdminStaffUpdate(
+    payload.staff.data,
+    staffId
+  );
+
+  if (response.ok) {
+    toast.success("सफलतापुर्वक स्टाफ पुनः प्रविष्ट भयो !!!!!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    yield fetchallstaffRequest(api,{
+      name: "staff_name",
+      page: 0,
+      perPage: 10,
+    });
+    yield call(history.push, "/suchana/stafflist");
+    yield put(
+      AdminActions.updatestaffSuccess(response.data)
+    );
+  } else {
+    yield put(AdminActions.updatestaffFailure());
+    toast.error(
+      "तपाईको कार्य सफल हुन सकेन.. कृपया पुनः प्रयास गर्नुहोला !!!!",
+      {
+        position: toast.POSITION.TOP_CENTER,
+      }
+    );
+  }
+}
+
+
+
 export function* addnoticeRequest(api, action) {
   const { payload, attachment } = action;
 

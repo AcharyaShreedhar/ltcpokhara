@@ -105,6 +105,17 @@ const addstaffSuccess = (state, action) =>
 const addstaffFailure = (state, action) =>
   state.merge({ ...state, status: "error" });
 
+//update staff
+const updatestaffRequest = (state, action) =>
+state.merge({ ...state, status: "pending" });
+const updatestaffSuccess = (state, action) =>
+state.merge({
+  ...state,
+  status: "done",
+});
+const updatestaffFailure = (state, action) =>
+state.merge({ ...state, status: "error" });
+
 // Add Notice
 const addnoticeRequest = (state, action) =>
   state.merge({ ...state, status: "pending" });
@@ -192,6 +203,10 @@ export const reducer = createReducer(initialState, {
   [AdminTypes.ADDSTAFF_REQUEST]: addstaffRequest,
   [AdminTypes.ADDSTAFF_SUCCESS]: addstaffSuccess,
   [AdminTypes.ADDSTAFF_FAILURE]: addstaffFailure,
+
+  [AdminTypes.UPDATESTAFF_REQUEST]: updatestaffRequest,
+  [AdminTypes.UPDATESTAFF_SUCCESS]: updatestaffSuccess,
+  [AdminTypes.UPDATESTAFF_FAILURE]: updatestaffFailure,
 
   [AdminTypes.ADDNOTICE_REQUEST]: addnoticeRequest,
   [AdminTypes.ADDNOTICE_SUCCESS]: addnoticeSuccess,
