@@ -22,8 +22,10 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const usersRoutes = require("./app/routes/usersRoutes");
+const noticesRoutes = require("./app/routes/noticesRoutes")
 
 app.use("/api/v1", usersRoutes);
+app.use("/api/v1", noticesRoutes);
 
 
 const port = process.env.PORT || 3001;
