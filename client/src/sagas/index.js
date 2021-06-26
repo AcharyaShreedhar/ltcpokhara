@@ -39,6 +39,7 @@ import {
 import{
   fetchallpressreleaseRequest,
   fetchpressreleaseRequest,
+  addpressreleaseRequest,
 
 }from "./pressrelease";
 
@@ -80,6 +81,7 @@ export default function* root() {
     takeLatest(DownloadTypes.ADDDOWNLOADS_REQUEST, adddownloadsRequest, api),
     takeLatest(PressReleaseTypes.FETCHALLPRESSRELEASE_REQUEST, fetchallpressreleaseRequest , api),
     takeLatest(PressReleaseTypes.FETCHALLPRESSRELEASE_REQUEST, fetchallpressreleaseRequest , api),
-    takeLatest(PressReleaseTypes.FETCHPRESSRELEASE_REQUEST, fetchpressreleaseRequest , api)
+    takeLatest(PressReleaseTypes.FETCHPRESSRELEASE_REQUEST, fetchpressreleaseRequest , api),
+    takeLatest(PressReleaseTypes.ADDPRESSRELEASE_REQUEST, addpressreleaseRequest , api)
   ]);
 }
