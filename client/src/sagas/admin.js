@@ -18,6 +18,19 @@ export function* fetchalleventsRequest(api, action) {
   }
 }
 
+export function* fetcheventsRequest(api, action) {
+  const eventId = action.payload;
+
+  const response = yield api.getEvents(eventId);
+  if (response.ok) {
+    yield put(
+      AdminActions.fetcheventsSuccess(response.data)
+    );
+  } else {
+    yield put(AdminActions.fetcheventsFailure());
+  }
+}
+
 
 export function* addstaffRequest(api, action) {
   const { payload, attachment } = action;
