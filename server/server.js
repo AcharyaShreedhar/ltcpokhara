@@ -26,10 +26,11 @@ const noticesRoutes = require("./app/routes/noticesRoutes")
 const publicationsRoutes = require("./app/routes/publicationsRoutes");
 const staffsRoutes = require("./app/routes/staffsRoutes");
 const eventsRoutes = require("./app/routes/eventsRoutes");
+
 const pressReleaseRoutes = require("./app/routes/pressReleaseRoutes");
 const booksRoutes = require("./app/routes/booksRoutes");
 const downloadsRoutes = require("./app/routes/downloadsRoutes");
-
+const nirdeshikaKaryabidhiRoutes = require("./app/routes/nirdishikaKaryabidhiRoutes");
 
 
 app.use("/api/v1", publicationsRoutes);
@@ -40,6 +41,8 @@ app.use("/api/v1", eventsRoutes);
 app.use("/api/v1", pressReleaseRoutes);
 app.use("/api/v1", booksRoutes);
 app.use("/api/v1", downloadsRoutes);
+app.use("/api/v1", nirdeshikaKaryabidhiRoutes);
+
 
 
 const port = process.env.PORT || 3001;
