@@ -2,6 +2,7 @@ import { takeEvery, takeLatest, all } from "redux-saga/effects";
 import API from "../services/api";
 import { AppTypes } from "../actions/app";
 import { AdminTypes } from "../actions/admin";
+import { PublicationTypes} from "../actions/publication";
 
 import { loginRequest, logoutRequest } from "./app";
 import {
@@ -14,6 +15,9 @@ import {
   fetchpublicationRequest,
   fetchstaffRequest,
 } from "./admin";
+import {
+  fetchallbooksRequest,
+} from "./publication";
 
 const api = API.create();
 
@@ -35,5 +39,6 @@ export default function* root() {
       api
     ),
     takeLatest(AdminTypes.FETCHSTAFF_REQUEST, fetchstaffRequest, api),
+    takeLatest(PublicationTypes.FETCHALLBOOKS_REQUEST, fetchallbooksRequest, api),
   ]);
 }
