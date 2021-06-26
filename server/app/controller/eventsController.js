@@ -37,15 +37,16 @@ async function getAllEvents(req, res) {
   
   //Controller for adding a Event
   async function addEvents(req, res) {
-    const addEventsQuery = `INSERT INTO events (event_title, submitted_by, published_date, event_content) values (?,?,?,?)`;
+    const addEventsQuery = `INSERT INTO events (event_title, approved_by, event_date, event_content, event_file) values (?,?,?,?,?)`;
     pool.query(
       addEventsQuery,
       [
                
         req.body.event_title,
-        req.body.submitted_by,
-        req.body.published_date,
-        req.body.event_content,         
+        req.body.approved_by,
+        req.body.event_date,
+        req.body.event_content,
+        req.body.event_file,         
       ],
       (error, results, fields) => {
         if (error) {
@@ -58,15 +59,16 @@ async function getAllEvents(req, res) {
   
   //Controller for updating a Event
   async function updateEvents(req, res) {
-    const updateEventsQuery = `UPDATE events SET event_title=?, submitted_by=?, published_date=?, event_content=? WHERE event_id=?`;
+    const updateEventsQuery = `UPDATE events SET event_title=?, approved_by=?, event_date=?, event_content=?, event_file=? WHERE event_id=?`;
     pool.query(
       updateEventsQuery,
       [
                        
         req.body.event_title,
-        req.body.submitted_by,
-        req.body.published_date,
+        req.body.approved_by,
+        req.body.event_date,
         req.body.event_content,
+        req.body.event_file,
         req.params.eventId,
       ],
       (error, results, fields) => {
