@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { isNil } from "ramda";
+import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
 import { englishToNepaliNumber } from "nepali-number";
@@ -17,7 +18,7 @@ class Staff extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     var staffList = [];
     if (nextProps != prevState) {
-      staffList = nextProps.staffsData.data.staffs;
+      staffList = nextProps.staffsData.data;
     }
     const pageCount = !isNil(staffList)
       ? Math.ceil(staffList.total / nextProps.perPage)
@@ -90,6 +91,14 @@ class Staff extends Component {
     );
   }
 }
+
+Staff.propTypes = {
+  staffsData: PropTypes.any,
+};
+
+Staff.defaultProps = {
+  staffsData: {},
+};
 
 const mapStateToProps = (state) => ({
   staffsData: state.admin.staffs,

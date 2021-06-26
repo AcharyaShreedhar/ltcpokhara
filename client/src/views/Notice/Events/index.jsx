@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { isNil } from "ramda";
+import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
 import { englishToNepaliNumber } from "nepali-number";
@@ -18,7 +19,7 @@ class Events extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     var eventsList = [];
     if (nextProps != prevState) {
-      eventsList = nextProps.eventsData;
+      eventsList = nextProps.eventsData.data;
     }
     const pageCount = !isNil(eventsList)
       ? Math.ceil(eventsList.total / nextProps.perPage)
@@ -86,6 +87,14 @@ class Events extends Component {
     );
   }
 }
+
+Events.propTypes = {
+  eventsData: PropTypes.any,
+};
+
+Events.defaultProps = {
+  eventsData: {},
+};
 
 const mapStateToProps = (state) => ({
   eventsData: state.admin.programmes,
