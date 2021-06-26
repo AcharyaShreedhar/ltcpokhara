@@ -57,6 +57,19 @@ return state.merge({
 const fetchallnirdesikaFailure = (state, action) => {
 state.merge({ ...state, status: "error" });
 };
+//fetch a nirdesika
+const fetchnirdesikaRequest = (state, action) =>
+  state.merge({ ...state, token: "", status: "pending" });
+const fetchnirdesikaSuccess = (state, action) => {
+  return state.merge({
+    ...state,
+    status: "done",
+    nirdesikaData: action.response,
+  });
+};
+const fetchnirdesikaFailure = (state, action) => {
+  state.merge({ ...state, status: "error" });
+};
 
 const clearRequest = (state, action) =>
   state.merge({ ...state, ...initialState });
@@ -80,6 +93,10 @@ export const reducer = createReducer(initialState, {
 [PublicationTypes.FETCHALLNIRDESIKA_REQUEST]: fetchallnirdesikaRequest,
 [PublicationTypes.FETCHALLNIRDESIKA_SUCCESS]: fetchallnirdesikaSuccess,
 [PublicationTypes.FETCHALLNIRDESIKA_FAILURE]: fetchallnirdesikaFailure,
+//Fetch allnirdesika  
+[PublicationTypes.FETCHNIRDESIKA_REQUEST]: fetchnirdesikaRequest,
+[PublicationTypes.FETCHNIRDESIKA_SUCCESS]: fetchnirdesikaSuccess,
+[PublicationTypes.FETCHNIRDESIKA_FAILURE]: fetchnirdesikaFailure,
 
 [PublicationTypes.CLEAR_REQUEST]: clearRequest,
 });
