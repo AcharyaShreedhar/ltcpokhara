@@ -16,6 +16,7 @@ import {
   fetchstaffRequest,
   addstaffRequest,
   updatestaffRequest,
+  deletestaffRequest,
   addnoticeRequest,
   addpublicationRequest,
   fetchnoticeRequest,
@@ -51,6 +52,7 @@ export default function* root() {
     takeLatest(AdminTypes.FETCHSTAFF_REQUEST, fetchstaffRequest, api),
     takeLatest(AdminTypes.ADDSTAFF_REQUEST, addstaffRequest, api),
     takeLatest(AdminTypes.UPDATESTAFF_REQUEST, updatestaffRequest, api),
+    takeLatest(AdminTypes.DELETESTAFF_REQUEST, deletestaffRequest, api),
     takeLatest(AdminTypes.ADDNOTICE_REQUEST, addnoticeRequest, api),
     takeLatest(AdminTypes.ADDPUBLICATION_REQUEST, addpublicationRequest, api),
 
