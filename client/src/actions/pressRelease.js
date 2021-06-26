@@ -12,6 +12,11 @@ const { Types, Creators } = createActions({
   fetchallpressreleaseSuccess: ["response"],
   fetchallpressreleaseFailure: null,
 
+  //fetch pressrelease
+fetchpressreleaseRequest: ["payload"],
+fetchpressreleaseSuccess: ["response"],
+fetchpressreleaseFailure: null,
+
     // Clearn all caches
     clearRequest: null,
 });
