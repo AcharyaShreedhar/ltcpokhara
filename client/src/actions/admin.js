@@ -12,6 +12,10 @@ const { Types, Creators } = createActions({
   fetchalleventsSuccess: ["response"],
   fetchalleventsFailure: null,
 
+  fetcheventsRequest: ["payload"],
+  fetcheventsSuccess: ["response"],
+  fetcheventsFailure: null,  
+
   addstaffRequest: ["payload", "image"],
   addstaffSuccess: ["response"],
   addstaffFailure: null,
