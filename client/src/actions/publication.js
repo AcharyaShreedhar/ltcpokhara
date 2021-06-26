@@ -16,6 +16,11 @@ const { Types, Creators } = createActions({
  fetchbooksSuccess: ["response"],
  fetchbooksFailure: null,
 
+//Add books
+addbooksRequest: ["payload"],
+addbooksSuccess: ["response"],
+addbooksFailure: null,
+
  // Clearn all caches
  clearRequest: null,
 });
