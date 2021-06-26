@@ -73,6 +73,7 @@ const create = (baseURL = Config.API_URL) => {
   const getBooksList = (payload) => api.post("booksList", payload);
   const getBooks = (bookId) =>api.get(`books/${bookId}`);
   const postPublicationBooksSave = (payload) =>api.post("books", payload);
+  const getNirdesikaList = (payload) => api.post("nirdeshikakaryabidhiList", payload);
 
 
   return {
@@ -91,6 +92,7 @@ const create = (baseURL = Config.API_URL) => {
     getBooksList,
     getBooks,
     postPublicationBooksSave,
+    getNirdesikaList,
   };
 };
 
