@@ -5,6 +5,7 @@ import Dropzone from "react-dropzone";
 import { Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { NepaliDatePicker } from "nepali-datepicker-reactjs";
 import { Button, Input } from "../../../components";
 import AdminActions from "../../../actions/admin";
 import "../admin.scss";
@@ -12,30 +13,40 @@ import "../admin.scss";
 class AddNotice extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      notice_title: "",
+      notice_cat: "",
+      notice_publisheddate: "",
+      notice_content: "",
+      notice_approvedby: "",
+      notice_file: "",
+      attachment:"",
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleTitle = this.handleTitle.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
-    this.handleApproval = this.handleApproval.bind(this);
     this.handleDate = this.handleDate.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
   }
 
   handleSubmit() {
+    
     const {
-      title,
-      category,
-      publishedDate,
-      approvedBy,
+      notice_title,
+      notice_cat,
+      notice_content,
+      notice_publisheddate,
+      notice_approvedby,
       attachment,
     } = this.state;
+    console.log('attachment',attachment)
     const payload = {
       notice: {
         data: {
-          notice_title: title,
-          notice_cat: category,
-          notice_publisheddate: publishedDate,
-          notice_approvedby: approvedBy,
+          notice_title: notice_title,
+          notice_cat: notice_cat,
+          notice_content: notice_content,
+          notice_publisheddate: notice_publisheddate,
+          notice_approvedby: notice_approvedby,
           notice_file: attachment.name,
         },
       },
@@ -44,18 +55,12 @@ class AddNotice extends Component {
     this.props.saveNotice(payload, attachment);
   }
 
-  handleTitle(e) {
-    this.setState({ title: e.trim() });
-  }
   handleCategory(e) {
-    this.setState({ category: e.target.value });
+    this.setState({ notice_cat: e.target.value });
   }
 
-  handleApproval(e) {
-    this.setState({ approvedBy: e });
-  }
   handleDate(e) {
-    this.setState({ publishedDate: e.trim() });
+    this.setState({ notice_publisheddate: e });
   }
   handleDrop(e) {
     this.setState({ attachment: e[0] });
@@ -64,10 +69,11 @@ class AddNotice extends Component {
   render() {
     const { isBusy } = this.props;
     const {
-      title,
-      category,
-      approvedBy,
-      publishedDate,
+      notice_title,
+      notice_cat,
+      notice_content,
+      notice_publisheddate,
+      notice_approvedby,
       attachment,
     } = this.state;
     return (
@@ -77,19 +83,18 @@ class AddNotice extends Component {
             सुचना
           </div>
           <Input
-            className="mt-4"
-            title="Title"
+            className="mb-4"
+            title="शीर्षक "
+            value={notice_title}
             direction="vertical"
-            value={title}
-            placeholder="Type here..."
-            onChange={this.handleTitle}
+            onChange={(e) => this.setState({ notice_title: e })}
           />
           <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label className="core-input-label">Category</Form.Label>
+            <Form.Label className="core-input-label">वर्ग</Form.Label>
             <Form.Control
               className="input"
               as="select"
-              value={category}
+              value={notice_cat}
               onChange={this.handleCategory}
             >
               <option value="newsnotice">सूचना तथा समाचारहरू</option>
@@ -98,20 +103,28 @@ class AddNotice extends Component {
             </Form.Control>
           </Form.Group>
           <Input
-            className="mt-4"
-            title="Approved By"
+            className="mb-4"
+            title="बेहोरा"
+            value={notice_content}
             direction="vertical"
-            value={approvedBy}
-            placeholder="Type here..."
-            onChange={this.handleApproval}
+            as="textarea"
+            onChange={(e) => this.setState({ notice_content: e })}
           />
+
           <Input
-            className="mt-4"
-            title="Published Date"
+            className="mb-4"
+            title="रुजुकर्ता"
+            value={notice_approvedby}
             direction="vertical"
-            value={publishedDate}
-            placeholder="Type here..."
-            onChange={this.handleDate}
+            onChange={(e) => this.setState({ notice_approvedby: e })}
+          />
+          <span className="dsl-b18">प्रकाशित मिति</span>
+          <NepaliDatePicker
+            inputClassName="form-control"
+            className="mb-4"
+            value={notice_publisheddate}
+            onChange={(e) => this.handleDate(e)}
+            options={{ calenderLocale: "ne", valueLocale: "en" }}
           />
           <Dropzone
             className="drag-drop"
@@ -149,20 +162,17 @@ class AddNotice extends Component {
 }
 
 AddNotice.propTypes = {
-  title: PropTypes.string,
-  approvedBy: PropTypes.string,
-  publishedDate: PropTypes.string,
-  category: PropTypes.string,
-  onSubmit: PropTypes.func,
+  notice_title: PropTypes.string,
+  notice_approvedby: PropTypes.string,
+  notice_publisheddate: PropTypes.string,
+  notice_cat: PropTypes.string,
 };
 
 AddNotice.defaultProps = {
-  title: "",
-  category: "",
-  publishedDate: "",
-  approvedBy: "",
-
-  OnSubmit: () => {},
+  notice_title: "",
+  notice_cat: "",
+  notice_publisheddate: "",
+  notice_approvedby: "",
 };
 
 const mapDispatchToProps = (dispatch) => ({
