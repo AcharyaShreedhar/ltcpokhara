@@ -69,8 +69,17 @@ export function* addbooksRequest(api, action) {
   const response = yield api.postPublicationBooksSave(books);
 
   if (response.ok) {
+    toast.success("सफलतापुर्वक हाते पुस्तिका सम्प्रेषण भयो  !!!!!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
     yield put(PublicationActions.addbooksSuccess());
   } else {
+    toast.error(
+      "तपाईको कार्य सफल हुन सकेन.. कृपया पुनः प्रयास गर्नुहोला !!!!",
+      {
+        position: toast.POSITION.TOP_CENTER,
+      }
+    );
     yield put(PublicationActions.addbooksFailure());
   }
 }

@@ -11,9 +11,9 @@ const addMenuItems = [
   { id: 3, label: "Add Staffs", name: "staff", url: "/admin/add_staff" },
   {
     id: 4,
-    label: "Add Publications",
-    name: "publication",
-    url: "/admin/add_publication",
+    label: "Add Book",
+    name: "book",
+    url: "/admin/add_book",
   },
 ];
 
