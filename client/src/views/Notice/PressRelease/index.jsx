@@ -75,7 +75,7 @@ class PressRelease extends Component {
       <div>
         {equals(loc, "pressreleaselist") && (
           <PressreleaseSection.List
-            title="कार्यक्रमहरू सम्बन्धि विवरण"
+            title="प्रेस विज्ञप्ति सम्बन्धि विवरण"
             pageCount={pageCount}
             data={data}
             authenticated={!isEmpty(token)}
@@ -87,13 +87,13 @@ class PressRelease extends Component {
 
         {equals(loc, "pressreleasedetail") && (
           <PressreleaseSection.Detail
-            title="कार्यक्रमको बिस्तृत विवरण"
+            title="प्रेस विज्ञप्तिको बिस्तृत विवरण"
             history={this.props.history}
           />
         )}
         {equals(loc, "pressreleaseedit") && !isEmpty(token) && (
           <PressreleaseSection.Edit
-            title="कार्यक्रमहरू पुनः प्रविष्ट"
+            title="प्रेस विज्ञप्ति पुनः प्रविष्ट"
             history={this.props.history}
             onUpdate={(e, id) => this.props.updatePressRelease(e, id)}
           />

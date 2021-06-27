@@ -19,7 +19,7 @@ class Detail extends Component {
   }
 
   render() {
-    const { isBusy } = this.props;
+    const { isBusy,title } = this.props;
     const {
       event_title,
       event_content,
@@ -31,7 +31,7 @@ class Detail extends Component {
     return (
       <div className="d-flex flex-column p-5">
         <div className="titlebar justify-content-center">
-          कार्यक्रमको बिस्तृत विवरण
+        {title}
         </div>
         <Row className="p-2">
           <Col xs={1} md={1} lg={1} className="p-0">

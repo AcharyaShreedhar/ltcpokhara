@@ -75,7 +75,7 @@ class Staff extends Component {
       <div>
         {equals(loc, "stafflist") && (
           <StaffSection.List
-            title="कार्यक्रमहरू सम्बन्धि विवरण"
+            title="कर्मचारी सम्बन्धि विवरण"
             pageCount={pageCount}
             data={data}
             authenticated={!isEmpty(token)}
@@ -87,13 +87,13 @@ class Staff extends Component {
 
         {equals(loc, "staffdetail") && (
           <StaffSection.Detail
-            title="कार्यक्रमको बिस्तृत विवरण"
+            title="कर्मचारी बिस्तृत विवरण"
             history={this.props.history}
           />
         )}
         {equals(loc, "staffedit") && !isEmpty(token) && (
           <StaffSection.Edit
-            title="कार्यक्रमहरू पुनः प्रविष्ट"
+            title="कर्मचारी पुनः प्रविष्ट"
             history={this.props.history}
             onUpdate={(e, id) => this.props.updatestaffs(e, id)}
           />

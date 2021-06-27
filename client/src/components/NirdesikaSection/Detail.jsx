@@ -18,7 +18,7 @@ class Detail extends Component {
   }
 
   render() {
-    const { isBusy } = this.props;
+    const { isBusy, title } = this.props;
     const {
       nirdeshika_sirsak,
       nirdeshika_bisaya,
@@ -28,9 +28,7 @@ class Detail extends Component {
     } = this.state;
     return (
       <div className="d-flex flex-column p-5">
-        <div className="sirsakbar justify-bisaya-center">
-          कार्यक्रमको बिस्तृत विवरण
-        </div>
+        <div className="sirsakbar justify-bisaya-center">{title}</div>
         <Row className="p-2">
           <Col xs={1} md={1} lg={1} className="p-0">
             <span className="dsl-b22 text-400">शीर्षक:</span>
@@ -56,7 +54,9 @@ class Detail extends Component {
         <Row className="p-2"></Row>
         <div className="image p-2">
           <FontAwesomeIcon icon={faFile} className="pr-1" />
-          {attachment || nirdeshika_file ? attachment.name || nirdeshika_file : ""}
+          {attachment || nirdeshika_file
+            ? attachment.name || nirdeshika_file
+            : ""}
         </div>
       </div>
     );

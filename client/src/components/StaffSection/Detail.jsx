@@ -19,7 +19,7 @@ class Detail extends Component {
   }
 
   render() {
-    const { isBusy } = this.props;
+    const { isBusy, title } = this.props;
     const {
       staff_name,
       staff_designation,
@@ -30,9 +30,7 @@ class Detail extends Component {
     } = this.state;
     return (
       <div className="d-flex flex-column p-5">
-        <div className="namebar justify-cat-center">
-          कार्यक्रमको बिस्तृत विवरण
-        </div>
+        <div className="namebar justify-cat-center">{title}</div>
         <Row className="p-2">
           <Col xs={1} md={1} lg={1} className="p-0">
             <span className="dsl-b22 text-400">शीर्षक:</span>
@@ -45,7 +43,6 @@ class Detail extends Component {
           <span className="dsl-b22 text-400">{staff_designation}</span>
         </Row>
         <Row className="p-2">
-         
           <Col xs={1} md={1} lg={1} className="p-0">
             <span className="dsl-b22 text-400">मिति:</span>
           </Col>

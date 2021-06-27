@@ -54,7 +54,7 @@ class Edit extends Component {
   }
 
   render() {
-    const { isBusy } = this.props;
+    const { isBusy, title } = this.props;
     const {
       staff_name,
       staff_designation,
@@ -66,7 +66,7 @@ class Edit extends Component {
     return (
       <div className="admin card mt-5">
         <div className="sign-in">
-          <div className="namebar text-center justify-cat-center">सुचना</div>
+          <div className="namebar text-center justify-cat-center">{title}</div>
           <Input
             className="mb-4"
             name="शीर्षक "
