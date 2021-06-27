@@ -76,7 +76,7 @@ class Downloads extends Component {
       <div>
         {equals(loc, "downloadslist") && (
           <DownloadsSection.List
-            title="कार्यक्रमहरू सम्बन्धि विवरण"
+            title=" डाउनलोड सम्बन्धि विवरण"
             pageCount={pageCount}
             data={data}
             authenticated={!isEmpty(token)}
@@ -88,13 +88,13 @@ class Downloads extends Component {
 
         {equals(loc, "downloaddetail") && (
           <DownloadsSection.Detail
-            title="कार्यक्रमको बिस्तृत विवरण"
+            title=" डाउनलोडको बिस्तृत विवरण"
             history={this.props.history}
           />
         )}
         {equals(loc, "downloadedit") && !isEmpty(token) && (
           <DownloadsSection.Edit
-            title="कार्यक्रमहरू पुनः प्रविष्ट"
+            title=" डाउनलोड पुनः प्रविष्ट"
             history={this.props.history}
             onUpdate={(e, id) => this.props.updatedownloads(e, id)}
           />

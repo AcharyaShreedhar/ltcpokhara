@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { NoticeSection } from "../../../components";
 import AdminActions from "../../../actions/admin";
 
-const headings = ["शीर्षक", "रुजुकर्ता", "मिति", ""];
+const headings = ["शीर्षक", "रुजुकर्ता", "मिति", "फाइल"];
 
 class NewsAndNotice extends Component {
   constructor(props) {
@@ -74,7 +74,7 @@ class NewsAndNotice extends Component {
       <div>
         {equals(loc, "newsandnoticeslist") && (
           <NoticeSection.List
-            title="कार्यक्रमहरू सम्बन्धि विवरण"
+            title="सूचना तथा समाचारहरू सम्बन्धि विवरण"
             pageCount={pageCount}
             data={data}
             authenticated={!isEmpty(token)}
@@ -86,14 +86,14 @@ class NewsAndNotice extends Component {
 
         {equals(loc, "newsandnoticesdetail") && (
           <NoticeSection.Detail
-            title="कार्यक्रमको बिस्तृत विवरण"
+            title="सूचना तथा समाचारहरूको बिस्तृत विवरण"
             history={this.props.history}
             onSelect={this.handleSelectMenu}
           />
         )}
         {equals(loc, "newsandnoticesedit") && !isEmpty(token) && (
           <NoticeSection.Edit
-            title="कार्यक्रमहरू पुनः प्रविष्ट"
+            title="सूचना तथा समाचारहरू पुनः प्रविष्ट"
             history={this.props.history}
             onSelect={this.handleSelectMenu}
             onUpdate={(e, id) => this.props.updateEvents(e, id)}

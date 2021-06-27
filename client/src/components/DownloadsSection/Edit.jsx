@@ -51,7 +51,7 @@ class Edit extends Component {
   }
 
   render() {
-    const { isBusy } = this.props;
+    const { isBusy, title } = this.props;
     const {
       download_title,
       published_date,
@@ -61,7 +61,7 @@ class Edit extends Component {
     return (
       <div className="admin card mt-5">
         <div className="sign-in">
-          <div className="titlebar text-center justify-cat-center">सुचना</div>
+          <div className="titlebar text-center justify-cat-center">{title}</div>
           <Input
             className="mb-4"
             title="शीर्षक "
@@ -122,7 +122,6 @@ Edit.propTypes = {
 Edit.defaultProps = {
   download_title: "",
   published_date: "",
- 
 
   OnSubmit: () => {},
 };

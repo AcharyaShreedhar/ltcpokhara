@@ -76,7 +76,7 @@ class Books extends Component {
       <div>
         {equals(loc, "bookslist") && (
           <BooksSection.List
-            title="कार्यक्रमहरू सम्बन्धि विवरण"
+            title="हाते पुस्तिका सम्बन्धि विवरण"
             pageCount={pageCount}
             data={data}
             authenticated={!isEmpty(token)}
@@ -88,13 +88,13 @@ class Books extends Component {
 
         {equals(loc, "booksdetail") && (
           <BooksSection.Detail
-            title="कार्यक्रमको बिस्तृत विवरण"
+            title="हाते पुस्तिकाको बिस्तृत विवरण"
             history={this.props.history}
           />
         )}
         {equals(loc, "booksedit") && !isEmpty(token) && (
           <BooksSection.Edit
-            title="कार्यक्रमहरू पुनः प्रविष्ट"
+            title="हाते पुस्तिका पुनः प्रविष्ट"
             history={this.props.history}
             onUpdate={(e, id) => this.props.updatebooks(e, id)}
           />

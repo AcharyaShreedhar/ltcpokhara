@@ -6,7 +6,7 @@ import { isEmpty, isNil, equals } from "ramda";
 import { NirdesikaSection } from "../../../components";
 import PublicationActions from "../../../actions/publication";
 
-const headings = ["शीर्षक", "विषय", "प्रकाशित मिति","फाइल"];
+const headings = ["शीर्षक", "विषय", "प्रकाशित मिति", "फाइल"];
 
 class Procedures extends Component {
   constructor(props) {
@@ -77,7 +77,7 @@ class Procedures extends Component {
       <div>
         {equals(loc, "procedureslist") && (
           <NirdesikaSection.List
-            title="कार्यक्रमहरू सम्बन्धि विवरण"
+            title="निर्देशिका / कार्यविधि सम्बन्धि विवरण"
             pageCount={pageCount}
             data={data}
             authenticated={!isEmpty(token)}
@@ -89,13 +89,13 @@ class Procedures extends Component {
 
         {equals(loc, "proceduredetail") && (
           <NirdesikaSection.Detail
-            title="कार्यक्रमको बिस्तृत विवरण"
+            title="निर्देशिका / कार्यविधिको बिस्तृत विवरण"
             history={this.props.history}
           />
         )}
         {equals(loc, "procedureedit") && !isEmpty(token) && (
           <NirdesikaSection.Edit
-            title="कार्यक्रमहरू पुनः प्रविष्ट"
+            title="निर्देशिका / कार्यविधिहरू पुनः प्रविष्ट"
             history={this.props.history}
             onUpdate={(e, id) => this.props.updateProcedures(e, id)}
           />

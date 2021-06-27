@@ -54,7 +54,7 @@ class Edit extends Component {
   }
 
   render() {
-    const { isBusy } = this.props;
+    const { isBusy, title } = this.props;
     const {
       nirdeshika_sirsak,
       nirdeshika_bisaya,
@@ -65,7 +65,9 @@ class Edit extends Component {
     return (
       <div className="admin card mt-5">
         <div className="sign-in">
-          <div className="sirsakbar text-center justify-cat-center">सुचना</div>
+          <div className="sirsakbar text-center justify-cat-center">
+            {title}
+          </div>
           <Input
             className="mb-4"
             sirsak="शीर्षक "
@@ -105,7 +107,8 @@ class Edit extends Component {
                   <input {...getInputProps()} />
                   <div className="image">
                     <FontAwesomeIcon icon={faUpload} className="pr-1" />
-                    Upload:{attachment ? attachment.name || nirdeshika_file : ""}
+                    Upload:
+                    {attachment ? attachment.name || nirdeshika_file : ""}
                   </div>
                 </div>
               </section>

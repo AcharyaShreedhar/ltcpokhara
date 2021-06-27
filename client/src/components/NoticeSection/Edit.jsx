@@ -65,7 +65,7 @@ class Edit extends Component {
   }
 
   render() {
-    const { isBusy } = this.props;
+    const { isBusy,title } = this.props;
     const {
       notice_title,
       notice_content,
@@ -79,7 +79,7 @@ class Edit extends Component {
       <div className="admin card mt-5">
         <div className="sign-in">
           <div className="titlebar text-center justify-content-center">
-            सुचना
+          {title}
           </div>
           <Input
             className="mb-4"
