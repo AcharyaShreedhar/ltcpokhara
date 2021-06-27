@@ -1,6 +1,6 @@
 import Login from "../layouts/Login";
 import AddNotice from "../views/AdminPanel/AddNotice";
-import AddPublication from "../views/AdminPanel/AddPublication";
+import AddBook from "../views/AdminPanel/AddBook";
 import AddStaff from "../views/AdminPanel/AddStaff";
 
 const adminRoutes = [
@@ -23,10 +23,10 @@ const adminRoutes = [
     component: AddStaff,
   },
   {
-    path: "/admin/add_publication",
-    title: "AddPublication",
-    name: "AddPublication",
-    component: AddPublication,
+    path: "/admin/add_book",
+    title: "AddBook",
+    name: "AddBook",
+    component: AddBook,
   },
 
   {

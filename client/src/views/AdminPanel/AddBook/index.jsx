@@ -5,51 +5,48 @@ import PropTypes from "prop-types";
 import Dropzone from "react-dropzone";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { NepaliDatePicker } from "nepali-datepicker-reactjs";
 import { Button, Input } from "../../../components";
-import AdminActions from "../../../actions/admin";
+import PublicationActions from "../../../actions/publication";
 import "../admin.scss";
 
-class AddPublication extends Component {
+class AddBook extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      book_title: "",
+      book_cat: "",
+      published_date: "",
+      book_file: "",
+      attachment: "",
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleTitle = this.handleTitle.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
-    this.handleSubject = this.handleSubject.bind(this);
     this.handleDate = this.handleDate.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
   }
 
   handleSubmit() {
-    const { title, category, publishedDate, subject, attachment } = this.state;
+    const { book_title, book_cat, published_date, attachment } = this.state;
     const payload = {
-      publication: {
+      books: {
         data: {
-          publication_title: title,
-          publication_subject: subject,
-          publication_cat: category,
-          publication_date: publishedDate,
-          publication_file: attachment.name,
+          book_title: book_title,
+          book_cat: book_cat,
+          published_date: published_date,
+          book_file: attachment.name,
         },
       },
     };
 
-    this.props.savePublication(payload, attachment);
+    this.props.saveBook(payload, attachment);
   }
 
-  handleTitle(e) {
-    this.setState({ title: e.trim() });
-  }
   handleCategory(event) {
-    this.setState({ category: event.target.value });
-  }
-
-  handleSubject(e) {
-    this.setState({ subject: e });
+    this.setState({ book_cat: event.target.value });
   }
   handleDate(e) {
-    this.setState({ publishedDate: e.trim() });
+    this.setState({ published_date: e });
   }
   handleDrop(e) {
     this.setState({ attachment: e[0] });
@@ -57,7 +54,7 @@ class AddPublication extends Component {
 
   render() {
     const { isBusy } = this.props;
-    const { title, category, subject, publishedDate, attachment } = this.state;
+    const { book_title, book_cat, published_date, attachment } = this.state;
     return (
       <div className="admin card mt-5">
         <div className="sign-in">
@@ -65,19 +62,18 @@ class AddPublication extends Component {
             प्रकाशन्
           </div>
           <Input
-            className="mt-4"
-            title="Title"
+            className="mb-4"
+            title="शीर्षक "
+            value={book_title}
             direction="vertical"
-            value={title}
-            placeholder="Type here..."
-            onChange={this.handleTitle}
+            onChange={(e) => this.setState({ book_title: e })}
           />
           <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label className="core-input-label">Category</Form.Label>
+            <Form.Label className="core-input-label">वर्ग</Form.Label>
             <Form.Control
               className="input"
               as="select"
-              value={category}
+              value={book_cat}
               onChange={this.handleCategory}
             >
               <option value="tor">निर्देशिका / कार्यविधि</option>
@@ -85,21 +81,14 @@ class AddPublication extends Component {
               <option value="download">अन्य डाउनलोड</option>
             </Form.Control>
           </Form.Group>
-          <Input
-            className="mt-4"
-            title="Subject"
-            direction="vertical"
-            value={subject}
-            placeholder="Type here..."
-            onChange={this.handleSubject}
-          />
-          <Input
-            className="mt-4"
-            title="Published Date"
-            direction="vertical"
-            value={publishedDate}
-            placeholder="Type here..."
-            onChange={this.handleDate}
+
+          <span className="dsl-b18">प्रकाशित मिति</span>
+          <NepaliDatePicker
+            inputClassName="form-control"
+            className="mb-4"
+            value={published_date}
+            onChange={(e) => this.handleDate(e)}
+            options={{ calenderLocale: "ne", valueLocale: "en" }}
           />
           <Dropzone
             className="drag-drop"
@@ -136,17 +125,17 @@ class AddPublication extends Component {
   }
 }
 
-AddPublication.propTypes = {
+AddBook.propTypes = {
   title: PropTypes.string,
   subject: PropTypes.string,
   publishedDate: PropTypes.string,
-  category: PropTypes.string,
+  book_cat: PropTypes.string,
   onSubmit: PropTypes.func,
 };
 
-AddPublication.defaultProps = {
+AddBook.defaultProps = {
   title: "",
-  category: "",
+  book_cat: "",
   publishedDate: "",
   subject: "",
 
@@ -154,7 +143,7 @@ AddPublication.defaultProps = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  savePublication: (e) => dispatch(AdminActions.addpublicationRequest(e)),
+  saveBook: (e) => dispatch(PublicationActions.addbooksRequest(e)),
 });
 
-export default connect(null, mapDispatchToProps)(AddPublication);
+export default connect(null, mapDispatchToProps)(AddBook);
