@@ -66,8 +66,17 @@ export function* addeventsRequest(api, action) {
   const response = yield api.postAdminEventsSave(staff);
 
   if (response.ok) {
+    toast.success("सफलतापुर्वक कार्यक्रम प्रविष्ट भयो !!!!!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
     yield put(AdminActions.addeventsSuccess());
   } else {
+    toast.error(
+      "तपाईको कार्य सफल हुन सकेन.. कृपया पुनः प्रयास गर्नुहोला !!!!",
+      {
+        position: toast.POSITION.TOP_CENTER,
+      }
+    );
     yield put(AdminActions.addeventsFailure());
   }
 }
@@ -247,14 +256,12 @@ export function* deletestaffRequest(api, action) {
     toast.success("सफलतापुर्वक स्टाफ हटाईयो !!!!!", {
       position: toast.POSITION.TOP_CENTER,
     });
-    yield fetchallstaffRequest(api,{
+    yield fetchallstaffRequest(api, {
       name: "staff_name",
       page: 0,
       perPage: 10,
     });
-    yield put(
-      AdminActions.deletestaffSuccess(response.data)
-    );
+    yield put(AdminActions.deletestaffSuccess(response.data));
   } else {
     yield put(AdminActions.deletestaffFailure());
     toast.error(
@@ -265,8 +272,6 @@ export function* deletestaffRequest(api, action) {
     );
   }
 }
-
-
 
 export function* addnoticeRequest(api, action) {
   const { payload, attachment } = action;
