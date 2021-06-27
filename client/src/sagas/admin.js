@@ -357,19 +357,10 @@ export function* addpublicationRequest(api, action) {
   const response = yield api.postAdminPublicationSave(publication);
 
   if (response.ok) {
-    yield put(AdminActions.addpublicationSuccess());
-  } else {
-    yield put(AdminActions.addpublicationFailure());
-  }
-}
-
-export function* fetchnoticeRequest(api, action) {
-  const response = yield api.getAdminNotice();
-  if (response.ok) {
     toast.success("सफलतापुर्वक सुचना सम्प्रेषण भयो  !!!!!", {
       position: toast.POSITION.TOP_CENTER,
     });
-    yield put(AdminActions.fetchnoticeSuccess(response.data));
+    yield put(AdminActions.addpublicationSuccess());
   } else {
     toast.error(
       "तपाईको कार्य सफल हुन सकेन.. कृपया पुनः प्रयास गर्नुहोला !!!!",
@@ -377,6 +368,15 @@ export function* fetchnoticeRequest(api, action) {
         position: toast.POSITION.TOP_CENTER,
       }
     );
+    yield put(AdminActions.addpublicationFailure());
+  }
+}
+
+export function* fetchnoticeRequest(api, action) {
+  const response = yield api.getAdminNotice();
+  if (response.ok) {
+    yield put(AdminActions.fetchnoticeSuccess(response.data));
+  } else {
     yield put(AdminActions.fetchnoticeFailure());
   }
 }
