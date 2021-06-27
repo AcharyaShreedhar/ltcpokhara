@@ -85,13 +85,13 @@ class Staff extends Component {
           />
         )}
 
-        {equals(loc, "staffsdetail") && (
+        {equals(loc, "staffdetail") && (
           <StaffSection.Detail
             title="कार्यक्रमको बिस्तृत विवरण"
             history={this.props.history}
           />
         )}
-        {equals(loc, "staffsedit") && !isEmpty(token) && (
+        {equals(loc, "staffedit") && !isEmpty(token) && (
           <StaffSection.Edit
             title="कार्यक्रमहरू पुनः प्रविष्ट"
             history={this.props.history}

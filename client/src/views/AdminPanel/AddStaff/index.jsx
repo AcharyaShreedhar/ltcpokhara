@@ -70,7 +70,6 @@ class AddStaff extends Component {
             title="नाम"
             direction="vertical"
             value={name}
-            placeholder="Type here..."
             onChange={this.handleName}
           />
           <Input
@@ -78,7 +77,6 @@ class AddStaff extends Component {
             title="पद"
             direction="vertical"
             value={designation}
-            placeholder="Type here..."
             onChange={this.handleDesignation}
           />
           <Input
@@ -86,7 +84,6 @@ class AddStaff extends Component {
             title="शाखा"
             direction="vertical"
             value={branch}
-            placeholder="Type here..."
             onChange={this.handleBranch}
           />
           <Input
@@ -94,7 +91,6 @@ class AddStaff extends Component {
             title="ईमेल"
             direction="vertical"
             value={email}
-            placeholder="Type here..."
             onChange={this.handleEmail}
           />
           <Dropzone

@@ -50,6 +50,6 @@ export {
   PressreleaseSection,
   BooksSection,
   NirdesikaSection,
-  DownloadsSection
+  DownloadsSection,
   StaffSection
 };

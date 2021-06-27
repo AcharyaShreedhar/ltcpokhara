@@ -193,36 +193,39 @@ export function* addstaffRequest(api, action) {
   const response = yield api.postAdminStaffSave(staff);
 
   if (response.ok) {
+    toast.success("सफलतापुर्वक स्टाफ प्रविष्ट भयो !!!!!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
     yield put(AdminActions.addstaffSuccess());
   } else {
+    toast.error(
+      "तपाईको कार्य सफल हुन सकेन.. कृपया पुनः प्रयास गर्नुहोला !!!!",
+      {
+        position: toast.POSITION.TOP_CENTER,
+      }
+    );
     yield put(AdminActions.addstaffFailure());
   }
 }
-
 
 //update staff
 
 export function* updatestaffRequest(api, action) {
   const { payload, staffId } = action;
 
-  const response = yield api.postAdminStaffUpdate(
-    payload.staff.data,
-    staffId
-  );
+  const response = yield api.postAdminStaffUpdate(payload.staff.data, staffId);
 
   if (response.ok) {
     toast.success("सफलतापुर्वक स्टाफ पुनः प्रविष्ट भयो !!!!!", {
       position: toast.POSITION.TOP_CENTER,
     });
-    yield fetchallstaffRequest(api,{
+    yield fetchallstaffRequest(api, {
       name: "staff_name",
       page: 0,
       perPage: 10,
     });
-    yield call(history.push, "/suchana/stafflist");
-    yield put(
-      AdminActions.updatestaffSuccess(response.data)
-    );
+    yield call(history.push, "/about/stafflist");
+    yield put(AdminActions.updatestaffSuccess(response.data));
   } else {
     yield put(AdminActions.updatestaffFailure());
     toast.error(
@@ -358,8 +361,17 @@ export function* addpublicationRequest(api, action) {
 export function* fetchnoticeRequest(api, action) {
   const response = yield api.getAdminNotice();
   if (response.ok) {
+    toast.success("सफलतापुर्वक सुचना सम्प्रेषण भयो  !!!!!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
     yield put(AdminActions.fetchnoticeSuccess(response.data));
   } else {
+    toast.error(
+      "तपाईको कार्य सफल हुन सकेन.. कृपया पुनः प्रयास गर्नुहोला !!!!",
+      {
+        position: toast.POSITION.TOP_CENTER,
+      }
+    );
     yield put(AdminActions.fetchnoticeFailure());
   }
 }
