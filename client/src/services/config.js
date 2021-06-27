@@ -1,4 +1,3 @@
-
 import { equals } from "ramda";
 const addMenuItems = [
   { id: 1, label: "Add Notice", name: "notice", url: "/admin/add_notice" },
@@ -15,6 +14,13 @@ const addMenuItems = [
     name: "book",
     url: "/admin/add_book",
   },
+  { id: 5, label: "Add Event", name: "event", url: "/admin/add_event" },
+  {
+    id: 6,
+    label: "Add Pressrelease",
+    name: "pressrelease",
+    url: "/admin/add_pressrelease",
+  },
 ];
 
 const AssetsURL = equals(process.env.NODE_ENV, "production")
@@ -28,4 +34,4 @@ const SPECIALOPTIONS = {
   LIST: -4, // List
 };
 
-export { AssetsURL,addMenuItems,SPECIALOPTIONS };
+export { AssetsURL, addMenuItems, SPECIALOPTIONS };

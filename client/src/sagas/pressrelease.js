@@ -74,8 +74,17 @@ export function* fetchpressreleaseRequest(api, action) {
     const response = yield api.postPressReleaseSave(pressrelease);
   
     if (response.ok) {
+      toast.success("सफलतापुर्वक प्रेस विज्ञप्ति प्रविष्ट भयो !!!!!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       yield put(PressReleaseActions.addpressreleaseSuccess());
     } else {
+      toast.error(
+        "तपाईको कार्य सफल हुन सकेन.. कृपया पुनः प्रयास गर्नुहोला !!!!",
+        {
+          position: toast.POSITION.TOP_CENTER,
+        }
+      );
       yield put(PressReleaseActions.addpressreleaseFailure());
     }
   }
