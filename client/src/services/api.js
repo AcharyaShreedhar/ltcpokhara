@@ -80,6 +80,13 @@ const create = (baseURL = Config.API_URL) => {
   const postAdminPublicationSave = (payload) =>
     api.post("publications", payload);
 
+
+    const getPressReleaseList = (payload) => api.post("pressReleaseList", payload);
+    const getPressRelease = (pressReleaseId) =>api.get(`pressRelease/${pressReleaseId}`);
+    const postPressReleaseSave = (payload) =>api.post("pressRelease", payload);
+
+  
+
   const getAdminNotice = () => api.get("notices");
   const getAdminPublication = () => api.get("publications");
   const getBooksList = (payload) => api.post("booksList", payload);
@@ -120,6 +127,10 @@ const create = (baseURL = Config.API_URL) => {
     getDownloadsList,
     getDownloads,
     postDownloadsSave,
+
+    getPressReleaseList,
+    getPressRelease,
+    postPressReleaseSave
   };
 };
 
